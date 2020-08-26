@@ -48,7 +48,7 @@ App = {
     },
   
     initContract: function() {
-      $.getJSON('build/contracts/Restaurant.json', function(data) {
+      $.getJSON('/contracts/Restaurant.json', function(data) {
         // Get the necessary contract artifact file and instantiate it with @truffle/contract
         var RestaurantArtifact = data;
         App.contracts.Restaurant = TruffleContract(RestaurantArtifact);
@@ -76,11 +76,11 @@ App = {
         return RestaurantInstance.getRestaurants();//.call();
       }).then(function(restaurants) {
         var list;
+        $(".list").html("");
         for (i = 0; i < restaurants.length; i++) {
-          // if (adopters[i] !== '0x0000000000000000000000000000000000000000') {
-            // list = $('l-element').eq(i).find('button').text('Success').attr('disabled', true);
+          
             $(".list").append(`<li class="l-element">${restaurants[i]}</li>`);
-          // }
+   
         }
       }).catch(function(err) {
         console.log(err.message);
