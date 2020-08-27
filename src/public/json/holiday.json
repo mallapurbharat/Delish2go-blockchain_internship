@@ -1,0 +1,26 @@
+[
+    {
+        "day":"Sunday"
+    },
+    {
+        "day":"Monday"
+    },
+    {
+        "day":"Tuesday"
+    },
+    {
+        "day":"Thursday"
+    },
+    {
+        "day":"Wednesday"
+    },
+    {
+        "day":"Friday"
+    },
+    {
+        "day":"Saturday"
+    },
+    {
+        "day":"None"
+    }
+]

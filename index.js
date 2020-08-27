@@ -9,8 +9,8 @@ app.set('view engine', 'ejs');
 app.use(express.static('./src/public'));
 app.use(express.static('./build'));
 
-app.use('/restaurant', require('./src/routes/restaurant_r'));
-app.use('/customer', require('./src/routes/customer_r'));
+app.use('/restaurant', require('./src/routes/routes_r'));
+app.use('/customer', require('./src/routes/routes_r'));
 
 
 // ############ routs ####################

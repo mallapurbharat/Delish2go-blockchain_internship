@@ -5,8 +5,18 @@ const mongo = require('../util/mongo');
 const fs = require('fs');
 const csv = require('csv-parser');
 
-router.get('/register', (req, res)=>{
-    res.render('register_restaurant');
+
+
+router.get('/register', async (req, res)=>{
+    let cities =[];
+
+    await mongo.get(mongo.CITY, {}).sort({ name: 1 }).forEach((city)=>{
+        // console.log(city.name);
+        cities.push(city.name);
+    })
+    // console.log(cities);
+
+    res.render('register_restaurant', { cities: cities});
 });
 
 router.get('/csv', (req, res)=>{
@@ -36,7 +46,8 @@ router.get('/', (req, res)=>{
         holiday:'',
         
     };
-    mongo.put(mongo.RESTAURANT,restaurant);
+    // mongo.put(mongo.RESTAURANT,restaurant);
+    
 });
 
 module.exports = router;

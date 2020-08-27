@@ -19,6 +19,14 @@ App = {
     //       petsRow.append(petTemplate.html());
     //     }
     //   });
+
+    $.getJSON('../../json/holiday.json', (data)=>{
+      data.forEach(day => {
+        $("#res-holiday").append(`<option value="${day.day}">${day.day}</option>`);
+        console.log("restarurant in");
+      });
+      $('#res-holiday').formSelect();
+    });
   
       return await App.initWeb3();
     },
@@ -116,9 +124,16 @@ App = {
   
   };
   
-  $(function() {
-    $(window).load(function() {
-      App.init();
-    });
+
+  $(document).ready(function(){
+    $('.timepicker').timepicker();
+    $('select').formSelect();
+
+    App.init();
   });
+  // $(function() {
+  //   $(window).load(function() {
+  //     App.init();
+  //   });
+  // });
   

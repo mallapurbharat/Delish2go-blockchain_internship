@@ -2,9 +2,6 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://dbadmin:admindb@cluster0.6ihi0.mongodb.net/delish2go?retryWrites=true&w=majority";
 let db = null;
 
-// const RESTAURANT = "restaurant";
-// const CITY = "city";
-
 const init = ()=>{
 
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -22,10 +19,21 @@ const put = (collec, data)=>{
     collection.insertOne(data).then(res=>console.log("inserted data id: ", res.insertedId)).catch(err=>console.log("Failed to insert ", err));
 };
 
+const  get =  (collec, query)=>{
+    const collection = db.collection(collec);
+    // let cities = collection.find();
+    //  collection.find({}).sort({ name: 1 }).forEach((city)=>{
+    //     console.log(city.name);
+    // });
+    return  collection.find(query);//.then(()=>{});
+    
+}
+
 module.exports ={
+    RESTAURANT:'restaurant',
+    CITY:'city',
     default: init,
     put: put,
-    RESTAURANT:'restaurant',
-    CITY:'city'
+    get: get
 };
 // export default mongo;
