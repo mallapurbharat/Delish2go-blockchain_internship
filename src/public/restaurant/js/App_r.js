@@ -1,3 +1,4 @@
+const HOST = "http://localhost:3000/";
 App = {
     web3Provider: null,
     contracts: {},
@@ -20,7 +21,7 @@ App = {
     //     }
     //   });
 
-    $.getJSON('../../json/holiday.json', (data)=>{
+    $.getJSON('/restaurant/json/holiday.json', (data)=>{
       data.forEach(day => {
         $("#res-holiday").append(`<option value="${day.day}">${day.day}</option>`);
         console.log("restarurant in");
@@ -67,12 +68,26 @@ App = {
         // Use our contract to retrieve and mark the adopted pets
         return App.Restaurants();
       });
+
+
+      $.getJSON('/contracts/DlishBlockchain.json', function(data) {
+        // Get the necessary contract artifact file and instantiate it with @truffle/contract
+        var DlishBlockchainArtifact = data;
+        App.contracts.DlishBlockchain = TruffleContract(DlishBlockchainArtifact);
+      
+        // Set the provider for our contract
+        App.contracts.DlishBlockchain.setProvider(App.web3Provider);
+      
+        // Use our contract to retrieve and mark the adopted pets
+        // return App.Restaurants();
+      });
   
       return App.bindEvents();
     },
   
     bindEvents: function() {
-      $(document).on('click', '.submit', App.handleRegister);
+      // $(document).on('click', '.submit', App.handleRegister);
+      $(".register-btn").click(App.handleRegister);
     },
   
     Restaurants: function() {
@@ -100,25 +115,48 @@ App = {
   
       // var petId = parseInt($(event.target).data('id'));
   
-      var RestaurantInstance;
+      let DlishBlockchainInstance;
   
-  web3.eth.getAccounts(function(error, accounts) {
-    if (error) {
-      console.log(error);
-    }
-  
-    var account = accounts[0];
-  
-    App.contracts.Restaurant.deployed().then(function(instance) {
-      RestaurantInstance = instance;
-  
-      // Execute adopt as a transaction by sending account
-      return RestaurantInstance.addRestaurant($(".name").val(), {from: account, gas:1000000});
-    }).then(function(result) {
-      return App.Restaurants();
-    }).catch(function(err) {
-      console.log(err.message);
-    });
+      web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+    
+      let account = accounts[0];
+    
+      App.contracts.DlishBlockchain.deployed().then(function(instance) {
+        DlishBlockchainInstance = instance;
+    
+        
+        return DlishBlockchainInstance.restaurant(account);
+      }).then(function(result) {
+        console.log(`The account ${account} is : ${result}`);
+
+        if(!result)
+          return DlishBlockchainInstance.RegisterRestaurant({from: account, gas:1000000}).then((res)=>{
+            $.ajax({
+              url:`${HOST}restaurant/register`,
+              method: 'POST',
+              contentType: 'application/json',
+              data:JSON.stringify({
+                res_acc_address:account,
+                restaurant_name:$("#res-name").val(),
+                phone:$("#res-phone").val(),
+                city:$("#res-city").val(),
+                address:$("#res-address").val(),
+                type:$("#res-type").val(),
+                start_time:$("#start-time").val(),
+                close_time:$("#close-time").val(),
+                holiday:$("#res-holiday").val(),
+                
+            }),
+              success:()=>console.log("data sent")
+            });
+          })
+        return App.Restaurants();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
   });
     }
   

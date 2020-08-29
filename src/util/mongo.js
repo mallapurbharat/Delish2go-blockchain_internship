@@ -16,24 +16,42 @@ const init = ()=>{
 
 const put = (collec, data)=>{
     const collection = db.collection(collec);
-    collection.insertOne(data).then(res=>console.log("inserted data id: ", res.insertedId)).catch(err=>console.log("Failed to insert ", err));
+    return collection.insertOne(data).then(res=>{
+        console.log("inserted data id: ", res.insertedId);
+        return 0;
+    }).catch(err=>{
+        console.log("Failed to insert ", err);
+        return 1;
+    });
 };
 
-const  get =  (collec, query)=>{
+const  get =  (collec, query, fields)=>{
     const collection = db.collection(collec);
-    // let cities = collection.find();
-    //  collection.find({}).sort({ name: 1 }).forEach((city)=>{
-    //     console.log(city.name);
-    // });
-    return  collection.find(query);//.then(()=>{});
-    
-}
+
+    return  fields ? collection.find(query, fields) : collection.find(query);  
+};
+
+const update = (collec, query, data)=>{
+    const collection = db.collection(collec);
+
+    return collection.updateOne(query, {$set:data}).then(res=>{
+        console.log(res.matchedCount," data updated: ");
+        if(res.matchedCount==1)
+            return 0;
+        return 2;
+    }).catch(err=>{
+        console.log("Failed to update ", err);
+        return 1;
+    });
+};
 
 module.exports ={
     RESTAURANT:'restaurant',
     CITY:'city',
+    DISH:'dish',
     default: init,
     put: put,
-    get: get
+    get: get,
+    update: update
 };
 // export default mongo;
