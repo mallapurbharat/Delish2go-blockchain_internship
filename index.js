@@ -38,6 +38,10 @@ app.get('/menu/:res_acc_add', async (req, res)=>{
     res.render('customer/menu', dishes);
 });
 
+app.get('/cart', (req, res)=>{
+    res.render('customer/cart');
+});
+
 
 
 

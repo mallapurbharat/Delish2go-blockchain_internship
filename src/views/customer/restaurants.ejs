@@ -294,5 +294,12 @@ button::after {
 <button>
 	<span>MENU</span>
 </button>
+
+<script>
+	document.getElementsByTagName("button")[0].addEventListener('click', ()=>{
+		console.log("hi");
+		window.location.replace("http://localhost:3000/menu/0x73e57089ae0301df36418e02af5a4651d41db702");
+	})
+</script>
 </body>
 	</html>

@@ -141,6 +141,11 @@ $(document).ready(function(){
     updateDishList(selectedCard);
   });
 
+  //redirect user to cart
+  $(".cart-btn").click((e)=>{
+    window.location.replace("http://localhost:3000/cart");
+  });
+
 });
 
 
