@@ -134,22 +134,29 @@ App = {
 
         if(!result)
           return DlishBlockchainInstance.RegisterRestaurant({from: account, gas:1000000}).then((res)=>{
+            let formData = new FormData();//$("#res-register-form")[0]);
+            formData.append('res_acc_address',account);
+            formData.append('restaurant_name', $("#res-name").val());
+            formData.append('img', $("#res-img")[0].files[0], $("#res-img").prop('files')[0].name);
+            formData.append('phone', $("#res-phone").val());
+            formData.append('city', $("#res-city").val());
+            formData.append('address', $("#res-address").val());
+            formData.append('type', $("#res-type").val());
+            formData.append('start_time', $("#start-time").val());
+            formData.append('close_time', $("#close-time").val());
+            formData.append('holiday', $("#res-holiday").val());
+            
+            // console.log(formData.get('img'));
+            // console.log($("#res-img").prop('files')[0].name);
+            // console.log($("#res-img")[0].files[0]);
+
+            // console.log($("#res-img").prop('files'));
             $.ajax({
               url:`${HOST}restaurant/register`,
               method: 'POST',
-              contentType: 'application/json',
-              data:JSON.stringify({
-                res_acc_address:account,
-                restaurant_name:$("#res-name").val(),
-                phone:$("#res-phone").val(),
-                city:$("#res-city").val(),
-                address:$("#res-address").val(),
-                type:$("#res-type").val(),
-                start_time:$("#start-time").val(),
-                close_time:$("#close-time").val(),
-                holiday:$("#res-holiday").val(),
-                
-            }),
+              data:formData,
+              processData: false,
+              contentType: false,
               success:()=>console.log("data sent")
             });
           })
@@ -158,6 +165,35 @@ App = {
         console.log(err.message);
       });
   });
+    },
+
+    handleRegisters: function(event){
+      event.preventDefault();
+      let formData = new FormData();//$("#res-register-form")[0]);
+            formData.append('res_acc_address','account');
+            formData.append('restaurant_name', $("#res-name").val());
+            formData.append('img', $("#res-img")[0].files[0]);
+            formData.append('phone', $("#res-phone").val());
+            formData.append('city', $("#res-city").val());
+            formData.append('address', $("#res-address").val());
+            formData.append('type', $("#res-type").val());
+            formData.append('start_time', $("#start-time").val());
+            formData.append('close_time', $("#close-time").val());
+            formData.append('holiday', $("#res-holiday").val());
+            
+            // console.log(formData.get('img'));
+            // console.log($("#res-img").prop('files')[0].name);
+            // console.log($("#res-img")[0].files[0]);
+            // , $("#res-img").prop('files')[0].name
+            // console.log($("#res-img").prop('files'));
+            $.ajax({
+              url:`${HOST}restaurant/register`,
+              method: 'POST',
+              data:formData,
+              processData: false,
+              contentType: false,
+              success:()=>console.log("data sent")
+            });
     }
   
   };

@@ -90,35 +90,35 @@ let updateDishList = (selectedCard)=>{
 $(document).ready(function(){
 
   // Populates all the cards based on the given JSON
-  dishes.forEach((dish, i) => {
-    $(".dish-container").append(`
-      <div class="uk-animation-slide-right-medium dish-card">
-        <div class="uk-card uk-card-default uk-child-width-1-2@s " uk-grid>
-            <div class="uk-card-media-left uk-cover-container">
-                <img class="dish-img" src="${dish.img}" alt="" uk-cover>
-                <canvas width="50" height="150"></canvas>
-            </div>
-            <div>
-                <div class="uk-card-body uk-grid-small uk-margin-small-right uk-child-width-1-1@s dish-body" uk-grid>
-                  <h3 class="uk-card-title uk-text-left dish-title" dish-id="${dish.Id}">${dish.name}</h3>
-                  <p class="uk-text-meta uk-text-left dish-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                  <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
-                    <div class="uk-flex">
-                      &#8377 <span class="dish-price">${dish.price}</span>
-                    </div>
+  // dishes.forEach((dish, i) => {
+  //   $(".dish-container").append(`
+  //     <div class="uk-animation-slide-right-medium dish-card">
+  //       <div class="uk-card uk-card-default uk-child-width-1-2@s " uk-grid>
+  //           <div class="uk-card-media-left uk-cover-container">
+  //               <img class="dish-img" src="${dish.img}" alt="" uk-cover>
+  //               <canvas width="50" height="150"></canvas>
+  //           </div>
+  //           <div>
+  //               <div class="uk-card-body uk-grid-small uk-margin-small-right uk-child-width-1-1@s dish-body" uk-grid>
+  //                 <h3 class="uk-card-title uk-text-left dish-title" dish-id="${dish.Id}">${dish.name}</h3>
+  //                 <p class="uk-text-meta uk-text-left dish-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+  //                 <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
+  //                   <div class="uk-flex">
+  //                     &#8377 <span class="dish-price">${dish.price}</span>
+  //                   </div>
 
-                    <div class="uk-grid-small uk-margin-small-right counter uk-flex-right unselectable" uk-grid>
-                      <div class="dec">-</div>
-                      <div class="qunt">0</div>
-                      <div class="inc">+</div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-      `);
-  });
+  //                   <div class="uk-grid-small uk-margin-small-right counter uk-flex-right unselectable" uk-grid>
+  //                     <div class="dec">-</div>
+  //                     <div class="qunt">0</div>
+  //                     <div class="inc">+</div>
+  //                   </div>
+  //                 </div>
+  //               </div>
+  //           </div>
+  //       </div>
+  //     </div>
+  //     `);
+  // });
 
 
 

@@ -27,38 +27,38 @@
     <div class="container">
         <div class="row">
             <div class="col s6">
-                <div class="card">
+                <div class="card">                  
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="text" id="res-name" class="name">
+                            <input type="text" name="restaurant_name" id="res-name" class="name">
                             <label for="res-name">Restaurant Name</label>                    
                         </div>
                         <div class="input-field col s6">
                             <i class="material-icons prefix">phone</i>
-                            <input type="tel" id="res-phone" class="validate">
+                            <input type="tel" name="phone" id="res-phone" class="validate">
                             <label for="res-phone">Phone</label>                    
                         </div>
                         <div class="input-field col s6">
                             <!-- <input type="text" id="res-type" class=""> -->
-                            <select  id="res-type" >
+                            <select name="type" id="res-type" >
                                 <option value="" disabled selected>Choose Type</option>
                                 <option value="veg">Veg</option>
                                 <option value="non veg">Non Veg</option>
-                              </select>
+                            </select>
                             <label >Type</label>                    
                         </div>
 
                         <div class="input-field col s6">
-                            <input type="text" id="start-time" class="timepicker">
+                            <input type="text" name="start_time" id="start-time" class="timepicker">
                             <label for="start-time">Start Time</label>                    
                         </div>
                         <div class="input-field col s6">
-                            <input type="text" id="close-time" class="timepicker">
+                            <input type="text" name="close_time" id="close-time" class="timepicker">
                             <label for="close-time">Close Time</label>                    
                         </div>
                         <div class="input-field col s6">
                             
-                            <select  id="res-holiday" >
+                            <select name="holiday" id="res-holiday" >
                                 <option value="" disabled selected>Choose Day</option>
                             </select>
                             <label for="res-holiday">Holiday</label>                    
@@ -66,7 +66,7 @@
                         <div class="input-field col s6">
                             <!-- <input type="text"> -->
                             
-                            <select  id="res-city" >
+                            <select name="city" id="res-city" >
                                 <option value="" disabled selected>Choose City</option>
                                 <% for(let i=0; i<cities.length; i++) {%>
                                     <option value="<%= cities[i] %>"><%= cities[i] %></option>
@@ -74,13 +74,24 @@
                             </select>
                             <label for="">City</label>                    
                         </div>
-                        <div class="input-field col s12">
-                            <input type="text" id="res-address" class="resAddress">
-                            <label for="res-address">Address</label>                    
+                        <div class="file-field input-field col s12">
+                            <div class="btn">
+                            <span>Image</span>
+                            <input type="file" name="res_img" id="res-img">
+                            </div>
+                            <div class="file-path-wrapper">
+                            <input class="file-path validate" name="res_img_name" type="text">
+                            </div>
                         </div>
+                        <div class="input-field col s12">
+                            <input type="text" id="res-address" name="address" class="resAddress">
+                            <label for="res-address">Address</label>                    
+                        </div>                        
                         
-                        <button class="register-btn btn blue">Register</button>
-                    </div>                    
+                        <div class="col s12">
+                            <button class="register-btn btn blue">Register</button>
+                        </div>
+                    </div>                                   
                 </div>
             </div>
         </div>
@@ -92,6 +103,8 @@
     <script src="/common/js/web3.min.js"></script>
     <script src="/common/js/truffle-contract.js"></script>
     <script src="/restaurant/js/App_r.js"></script>
+    <script src="/common/js/jquery.cookie.js"></script>
+    <!-- <script src="/restaurant/js/d2g_util.js"></script> -->
     <script src="/common/js/portis.js"></script>
 </body>
 </html>
