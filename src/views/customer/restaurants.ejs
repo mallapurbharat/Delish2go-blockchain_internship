@@ -242,11 +242,11 @@ span{
     <div class="flip-card">
     <div class="flip-card-inner">
       <div class="flip-card-front">
-          <img src="/customer/img/restaurants/talapakati.jpg" alt="Avatar" style="width:300px;height:300px;">
+          <img src="data:<%= restaurants[i].img.mimetype %>;base64,<%= restaurants[i].img.data.toString('base64') %>" alt="Avatar" style="width:300px;height:300px;">
       </div>
        <div class="flip-card-back">
-          <h1>THALAPPAKATTI</h1>
-         <p style="color:white">Everyone was craving for briyani for a long time. Nothing can beat the taste of Thalappakatti. Thank you for your wonderful service and especially for the packaging. I loved the box. Definitely we gonna reuse it. The briyani was more enough to serve two people. We are looking forward to order more.</p>
+          <h1><%= restaurants[i].restaurant_name %></h1>
+         <p style="color:white"><%= restaurants[i].address %></p>
   <button class="ms">
   <a  style="text-decoration: none;" href="dishes.html">
   <span>MENU</span>

@@ -112,8 +112,7 @@ App = {
   
     handleRegister: function(event) {
       event.preventDefault();
-  
-      // var petId = parseInt($(event.target).data('id'));
+
   
       let DlishBlockchainInstance;
   
@@ -134,7 +133,8 @@ App = {
 
         if(!result)
           return DlishBlockchainInstance.RegisterRestaurant({from: account, gas:1000000}).then((res)=>{
-            let formData = new FormData();//$("#res-register-form")[0]);
+          // let account = '0x616f0E1743174CCC777c08286724c67aED3907aA';
+            let formData = new FormData();
             formData.append('res_acc_address',account);
             formData.append('restaurant_name', $("#res-name").val());
             formData.append('img', $("#res-img")[0].files[0], $("#res-img").prop('files')[0].name);
@@ -146,11 +146,7 @@ App = {
             formData.append('close_time', $("#close-time").val());
             formData.append('holiday', $("#res-holiday").val());
             
-            // console.log(formData.get('img'));
-            // console.log($("#res-img").prop('files')[0].name);
-            // console.log($("#res-img")[0].files[0]);
-
-            // console.log($("#res-img").prop('files'));
+            
             $.ajax({
               url:`${HOST}restaurant/register`,
               method: 'POST',

@@ -24,14 +24,14 @@ app.get('/', (req, res)=>{
 
 
 app.get('/restaurants/:city?', async (req, res)=>{
-    let restaurants = null;
+    let restaurants = [];
 
     if(req.params.city)
         restaurants = await mongo.get(mongo.RESTAURANT, { city: req.params.city }).toArray();
     // console.log(restaurants);
 
     // res.json(restaurants);
-    res.render("customer/restaurants", restaurants);
+    res.render("customer/restaurants", {restaurants: restaurants});
 });
 
 
