@@ -7,17 +7,32 @@ const { getCookie } = require('../util/helper');
 const UPLOADS_PATH = 'src/uploads/';
 
 const multer = require('multer');
-const storage = multer.diskStorage({
+const restaurantImgStorage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, UPLOADS_PATH);
     },
     filename: function (req, file, cb) {
       let extentions = file.mimetype.split('/');
-      req.body.filename = req.body.res_acc_address + '.' + extentions[extentions.length-1];
-      cb(null, req.body.res_acc_address + '.' + extentions[extentions.length-1]);
+      let filename = req.body.res_acc_address + '.' + extentions[extentions.length-1];
+      req.body.filename = filename;
+      cb(null, filename);
     }
   });
-const upload = multer({ storage: storage});
+const restaurantImgUpload = multer({ storage: restaurantImgStorage});
+
+
+const dishImgStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, UPLOADS_PATH);
+    },
+    filename: function (req, file, cb) {
+      let extentions = file.mimetype.split('/');
+      let filename = uuidv4() + '.' + extentions[extentions.length-1];
+      req.body.filename = filename;
+      cb(null, filename);
+    }
+  });
+const dishImgUpload = multer({ storage: dishImgStorage});
 
 const fs = require('fs');
 const csv = require('csv-parser');
@@ -66,7 +81,7 @@ const registerRestaurant= (req)=>{
     return mongo.put(mongo.RESTAURANT, restaurant);
 };
 
-router.post('/register', upload.single('img'), (req, res)=>{
+router.post('/register', restaurantImgUpload.single('img'), (req, res)=>{
     let data = req.body;
     // console.log(req);
     // console.log(data);
@@ -98,25 +113,39 @@ router.get('/menu', async (req, res)=>{
     // res.render('restaurant/menu_r');
 });
 
-const UCDish=(dish_id, dish_name, type, description, price)=>{
+const UCDish=(req)=>{
+    let img_data
+    try{
+        img_data = fs.readFileSync(`${ UPLOADS_PATH }${ req.body.filename }`)
+    } catch (err){
+        console.log(err)
+    } finally{
+        fs.unlink(`${ UPLOADS_PATH }${ req.body.filename }`, err=>err?console.log(err):null)
+    }
+
+
     let dish = {        
-        dish_name: dish_name,     
-        type: type,
-        description: description,
-        price: price,    
+        dish_name: req.body.dish_name,   
+        img:{
+            data: img_data,
+            mimetype: req.file.mimetype
+        },  
+        type: req.body.type,
+        description: req.body.description,
+        price: req.body.price,    
     };
     
-    if(dish_id)
-        return mongo.update(mongo.DISH, { _id:dish_id }, dish);
+    if(req.body.dish_id!='null')
+        return mongo.update(mongo.DISH, { _id:req.body.dish_id }, dish);
       
     dish['_id']=uuidv4();
     return mongo.put(mongo.DISH, dish);
 };
 
-router.post('/menu', (req, res)=>{
+router.post('/UCDish', dishImgUpload.single('img'), (req, res)=>{
     let data = req.body;   
 
-    UCDish(data.dish_id, data.dish_name, data.type, data.description, data.price).then(result=>{
+    UCDish(req).then(result=>{
         if(result==0)
             return res.status(200).send({msg: "success"});
         if(result==1)
@@ -128,7 +157,7 @@ router.post('/menu', (req, res)=>{
 });
 
 
-router.get('/orders', (req, res)=>{
+router.get('/dishform', (req, res)=>{
     res.render('restaurant/dish_form');   
 });
 

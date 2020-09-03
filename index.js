@@ -86,11 +86,18 @@ app.get('/menu/:res_acc_add?', async (req, res)=>{
           img:"/customer/img/menu/08.jpg"
         }
       ]
+
+      let dishes=[];
+
+      if(req.params.res_acc_add){
+        let restaurant = await mongo.get(mongo.RESTAURANT, { _id: req.params.res_acc_add }, { dish_ids:1 }).toArray(); 
+         dishes = await mongo.get(mongo.DISH, { _id: { $in: restaurant[0].dish_ids }}).toArray();
+      }
     // let restaurant = await mongo.get(mongo.RESTAURANT, { _id: req.params.res_acc_add }, { dish_ids:1 }).toArray(); 
     // let dishes = await mongo.get(mongo.DISH, { _id: { $in: restaurant[0].dish_ids }}).toArray();
     // console.log(req.params.res_acc_add)
     // res.json(dishes); 
-    res.render('customer/menu', {dishes:dish});
+    res.render('customer/menu', {dishes:dishes});
 });
 
 app.get('/cart', (req, res)=>{

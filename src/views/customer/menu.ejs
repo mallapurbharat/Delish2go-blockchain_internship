@@ -43,13 +43,13 @@
       <div class="uk-animation-slide-right-medium dish-card">
         <div class="uk-card uk-card-default uk-child-width-1-2@s " uk-grid>
             <div class="uk-card-media-left uk-cover-container">
-                <img class="dish-img" src="<%= dishes[i].img %>" alt="" uk-cover>
+                <img class="dish-img" src="data:<%= dishes[i].img.mimetype %>;base64,<%= dishes[i].img.data.toString('base64') %>" alt="" uk-cover>
                 <canvas width="50" height="150"></canvas>
             </div>
             <div>
                 <div class="uk-card-body uk-grid-small uk-margin-small-right uk-child-width-1-1@s dish-body" uk-grid>
-                  <h3 class="uk-card-title uk-text-left dish-title" dish-id="<%=dishes[i].Id%>"><%= dishes[i].name %></h3>
-                  <p class="uk-text-meta uk-text-left dish-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  <h3 class="uk-card-title uk-text-left dish-title" dish-id="<%=dishes[i].Id%>"><%= dishes[i].dish_name %></h3>
+                  <p class="uk-text-meta uk-text-left dish-description"><%= dishes[i].description %></p>
                   <div class="uk-grid-small uk-child-width-expand@s" uk-grid>
                     <div class="uk-flex">
                       &#8377 <span class="dish-price"><%=dishes[i].price%></span>
