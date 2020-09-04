@@ -1,10 +1,11 @@
+const HOST = "http://localhost:3000/";
 let selectedDishId = null;
 
 const UCDish = event=>{
     
     let formData = new FormData();
     formData.append('dish_id',selectedDishId);
-    formData.append('dish_name', $("#dish_name").val());
+    formData.append('dish_name', $("#dish-name").val());
     formData.append('img', $("#dish-img")[0].files[0], $("#dish-img").prop('files')[0].name);
     formData.append('description', $("#dish-des").val());          
     formData.append('type', $("#dish-type").val());          

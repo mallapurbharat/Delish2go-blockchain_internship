@@ -28,7 +28,7 @@
   border-radius: 50px;
   background-color: green;
   display: flex;
-  /* vertical-align: middle; */
+  cursor: pointer;
 }
 
 .cart-btn i{

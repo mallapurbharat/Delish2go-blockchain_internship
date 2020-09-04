@@ -3,7 +3,7 @@ const mongo = require('./mongo');
 const isRestaurant = async (req, res, next)=>{
     let res_acc_add = req.cookies.res_acc_add;
 
-    if(!res_acc_add)
+    if(res_acc_add==undefined)
         res.status(401).send("Please unlock your wallet");
     else{
         let restaurant  = await mongo.get(mongo.RESTAURANT, { _id: res_acc_add }).toArray();

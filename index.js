@@ -18,8 +18,15 @@ app.use('/customer', require('./src/routes/routes_r'));
 
 
 // ############ routes ####################
-app.get('/', (req, res)=>{
-    res.render('home');
+app.get('/', async (req, res)=>{ 
+  let cities =[];
+
+  await mongo.get(mongo.CITY, {}).sort({ name: 1 }).forEach((city)=>{
+      
+      cities.push(city.name);
+  })
+
+  res.render('home', { cities: cities});
 });
 
 
@@ -91,7 +98,7 @@ app.get('/menu/:res_acc_add?', async (req, res)=>{
 
       if(req.params.res_acc_add){
         let restaurant = await mongo.get(mongo.RESTAURANT, { _id: req.params.res_acc_add }, { dish_ids:1 }).toArray(); 
-         dishes = await mongo.get(mongo.DISH, { _id: { $in: restaurant[0].dish_ids }}).toArray();
+        restaurant.length !=0 ? dishes = await mongo.get(mongo.DISH, { _id: { $in: restaurant[0].dish_ids }}).toArray() : null;
       }
     // let restaurant = await mongo.get(mongo.RESTAURANT, { _id: req.params.res_acc_add }, { dish_ids:1 }).toArray(); 
     // let dishes = await mongo.get(mongo.DISH, { _id: { $in: restaurant[0].dish_ids }}).toArray();

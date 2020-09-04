@@ -41,6 +41,8 @@ const { send } = require('process');
 
 
 
+// #################### ROUTES ########################
+
 router.get('/register', async (req, res)=>{
     let cities =[];
 
@@ -92,14 +94,14 @@ router.post('/register', restaurantImgUpload.single('img'), (req, res)=>{
 });
 
 
-// res1 : 0xb073e010297a0698b89361cd7378d67da1b915c2
+// res1 : 0x616f0E1743174CCC777c08286724c67aED3907aA chennai
 // res2 : 0x73e57089ae0301df36418e02af5a4651d41db702
 
 // dish1: 9ecf526c-22d4-4d06-b315-1c8e86f18080
 // dish2: 70c48ea1-4f84-48a8-b02f-f7cf0251096b
-router.get('/menu', async (req, res)=>{
+router.get('/menu', isRestaurant, async (req, res)=>{
 
-    let res_acc_add = getCookie(req, 'res_acc_add');
+    let res_acc_add = req.body.restaurant._id;
     if(res_acc_add == null)
         res.status(403).end();
     else{
@@ -109,7 +111,7 @@ router.get('/menu', async (req, res)=>{
     
         // res.json(dishes);
         
-        // res.render('restaurant/menu_r', {dishes:dishes});     
+        res.render('restaurant/menu_r', {dishes:dishes});     
     }       
     // res.render('restaurant/menu_r');
 });
@@ -140,10 +142,10 @@ const UCDish=(req)=>{
         return mongo.update(mongo.DISH, { _id:req.body.dish_id }, dish);
       
     dish['_id']=uuidv4();
-    return mongo.put(mongo.DISH, dish);
+    // return mongo.put(mongo.DISH, dish);
 };
 
-router.post('/UCDish', dishImgUpload.single('img'), (req, res)=>{
+router.post('/UCDish', isRestaurant, dishImgUpload.single('img'), (req, res)=>{
     let data = req.body;   
 
     UCDish(req).then(result=>{
@@ -158,7 +160,7 @@ router.post('/UCDish', dishImgUpload.single('img'), (req, res)=>{
 });
 
 
-router.get('/dishform', (req, res)=>{
+router.get('/dishform', isRestaurant, (req, res)=>{
     res.render('restaurant/dish_form');   
 });
 

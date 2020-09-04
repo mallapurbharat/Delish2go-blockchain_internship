@@ -58,7 +58,7 @@
         <% for(let i=0; i<dishes.length; i++) { %>
             <div class="dishescard1">
                 <div class="imgcard">
-                    <img src="/restaurant/img/menu/01.jpg" alt="img">
+                    <img src="data:<%= dishes[i].img.mimetype %>;base64,<%= dishes[i].img.data.toString('base64') %>" alt="img">
                 </div>
                 <div class="cardcontent">
                     <h2><%= dishes[i].dish_name %></h2>
