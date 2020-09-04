@@ -72,18 +72,15 @@
                 <h3>Order food from favourite restaurants near you.</h2>
 
 
-                <form action="" method="">
-                    <select id="">
-                        <option value="">Coimbatore</option>
-                        <option value="">Bangalore</option>
-                        <option value="">Chennai</option>
-                        <option value="">Mumbai</option>
 
-
+                    <select id="selectValue">
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Mumbai">Mumbai</option>
                     </select>
+                    <button class="homebtn" type="button" onclick="resValue()">Search</button>
 
-                    <button class="homebtn" type="submit">Search</button>
-                </form>
                 <i class="fa fa-search homei" aria-hidden="true"></i>
 
 
@@ -291,6 +288,13 @@
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <hr class="footerhr">
+
+<script>
+    function resValue() {
+            var City = document.querySelector("#selectValue");
+            window.location.href = `http://localhost:3000/restaurants/${City.value}`;
+    }
+</script>
 
 </body>
 </html>
