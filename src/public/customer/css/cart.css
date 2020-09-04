@@ -1,3 +1,10 @@
 .dishes-selected{
     list-style: none;
 }
+
+.place-order-btn{
+    background-color: orange;
+    color: #ffffff;
+    border-radius: .3em;
+    font-weight: bold;
+}

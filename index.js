@@ -43,57 +43,6 @@ app.get('/restaurants/:city?', async (req, res)=>{
 
 
 app.get('/menu/:res_acc_add?', async (req, res)=>{
-    let dish = [
-        {
-          Id:"101",
-          name:"Paneer Butter Masala",
-          price:"190",
-          img:"/customer/img/menu/01.jpg"
-        },
-        {
-          Id:"102",
-          name:"Biryani",
-          price:"190",
-          img:"/customer/img/menu/02.jpeg"
-        },
-        {
-          Id:"103",
-          name:"Chicken tikka masala",
-          price:"190",
-          img:"/customer/img/menu/03.jpeg"
-        },
-        {
-          Id:"104",
-          name:"Butter chicken",
-          price:"190",
-          img:"/customer/img/menu/04.jpg"
-        },
-        {
-          Id:"105",
-          name:"Alu Gobi",
-          price:"190",
-          img:"/customer/img/menu/05.jpg"
-        },
-        {
-          Id:"106",
-          name:"Carrot Halwa",
-          price:"190",
-          img:"/customer/img/menu/06.jpg"
-        },
-        {
-          Id:"107",
-          name:"Gulab Jamun",
-          price:"190",
-          img:"/customer/img/menu/07.jpg"
-        },
-        {
-          Id:"108",
-          name:"Chicken 65",
-          price:"190",
-          img:"/customer/img/menu/08.jpg"
-        }
-      ]
-
       let dishes=[];
 
       if(req.params.res_acc_add){

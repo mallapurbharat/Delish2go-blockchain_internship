@@ -32,6 +32,9 @@ let updateDishList = (selectedCard)=>{
 
   if(Storage){
     sessionStorage.setItem('dishes', JSON.stringify(dishesSelected.dishes));
+
+    let url = window.location.href.split('/');
+    sessionStorage.setItem('res_acc_add', url[url.length-1])
   }
   else
     alert("Sry your browser does not support storage");
