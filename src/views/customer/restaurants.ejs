@@ -245,7 +245,7 @@ span{
           <img src="data:<%= restaurants[i].img.mimetype %>;base64,<%= restaurants[i].img.data.toString('base64') %>" alt="Avatar" style="width:300px;height:300px;">
       </div>
        <div class="flip-card-back">
-          <h1><%= restaurants[i].restaurant_name %></h1>
+          <h1 restaurant_id="<%= restaurants[i]._id %>"><%= restaurants[i].restaurant_name %></h1>
          <p style="color:white"><%= restaurants[i].address %></p>
   <button class="ms">
   <a  style="text-decoration: none;" href="dishes.html">

@@ -3,6 +3,7 @@ const router = express.Router();
 const mongo = require('../util/mongo');
 const { v4:uuidv4 } = require('uuid');
 const { getCookie } = require('../util/helper');
+const { isRestaurant } = require('../util/auth');
 
 const UPLOADS_PATH = 'src/uploads/';
 
@@ -161,7 +162,7 @@ router.get('/dishform', (req, res)=>{
     res.render('restaurant/dish_form');   
 });
 
-router.get('/orders', (req, res)=>{
+router.get('/orders', isRestaurant, (req, res)=>{
     res.render('restaurant/orders_r');
 });
 

@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const mongo = require('./src/util/mongo');
 const bodyParser = require('body-parser');
-const multer = require('multer');
-const upload = multer({ dest: 'src/uploads/'});
+const cookieParser = require('cookie-parser');
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -12,6 +11,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('./src/public'));
 app.use(express.static('./build'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use('/restaurant', require('./src/routes/routes_r'));
 app.use('/customer', require('./src/routes/routes_r'));
