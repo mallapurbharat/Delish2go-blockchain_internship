@@ -61,6 +61,35 @@ app.get('/cart', (req, res)=>{
 });
 
 
+const placeOrder= async (req)=>{
+    let orderId = await mongo.get(mongo.ORDER, {}).sort({ _id:-1 }).limit(1).toArray();
+
+    let order = {
+        _id: orderId[0]._id+1,
+        customer_add: req.body.customer_add,
+        restaurant_add: req.body.restaurant_add,
+        deliveryPersonal_add: req.body.deliveryPersonal_add,
+        billAmount: req.body.billAmount,
+        status: 1,
+        address: req.body.address,
+        phone: req.body.phone,
+        customer_name: req.body.customer_name,
+        dishes: req.body.dishes                
+    };
+    
+    return mongo.put(mongo.ORDER, order);
+};
+
+app.post('/placeorder', (req, res)=>{
+    let data = req.body;
+    // console.log(req);
+    // console.log(data);
+    // console.log(req.file);
+    placeOrder(req).then(_=>res.status(200).send("Order placed successfully")).catch(_=>res.status(500).send("Order placed was not placed"));
+    // res.redirect('/');
+});
+
+
 
 
 app.listen(3000, ()=>{

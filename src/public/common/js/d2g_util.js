@@ -60,10 +60,11 @@ D2G = {
     return D2G.callback();
   },
   
-  placeOrder: async (res_acc_add, amount)=>{
+  placeOrder: async (res_acc_add, amount, dishDetails, dishes)=>{
 
     let d2gTokenInstance;
     let DlishBlockchainInstance;
+    // return Promise.resolve();
 
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
@@ -76,17 +77,43 @@ D2G = {
       
       if(!res)
         return false
+      // return Promise.reject(new Error('Failed to approve transaction'))
 
       console.log("Approved", res_acc_add, amount, account) 
 
-      // res = await DlishBlockchainInstance.restaurant(res_acc_add, {from: account, gas:10000000}).catch(err=>console.log(err))
-      res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, {from: account, gas:4712388}).catch(err=>console.log(err))
+      
+      // res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, {from: account, gas:4712388}).catch(err=>console.log(err))
       // console.log("Paid", res) 
       if(!res)
         return false
+        // return Promise.reject('Invalid amount or wallet not unlocked')//new Error('Invalid amount or wallet not unlocked'))
 
       console.log("Paid", res) 
+
+
+      $.ajax({
+        url:`${HOST}placeorder`,
+        method: 'POST',
+        data:JSON.stringify({            
+          customer_add: account,
+          restaurant_add: res_acc_add,
+          deliveryPersonal_add: null,
+          billAmount: amount,
+          address: $('#cus-address').val(),
+          phone: $('#cus-phone').val(),
+          customer_name: $('#cus-name').val(),
+          dishes: dishes                
+      }),
+        contentType: 'application/json',
+        success:(result)=>{
+          console.log("data sent")
+          alert(result)
+          window.location.href='/'
+        }
+        });
+
       return true
+      // return Promise.resolve('Order placed successfully in blockchan')
      
     })
   }

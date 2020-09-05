@@ -49,6 +49,7 @@ module.exports ={
     RESTAURANT:'restaurant',
     CITY:'city',
     DISH:'dish',
+    ORDER:'order',
     default: init,
     put: put,
     get: get,
