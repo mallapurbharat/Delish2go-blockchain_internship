@@ -54,8 +54,9 @@
     </div>
         <div class="orders">
 
+            <% for(let i=0; i< orders.length; i++) { %>
             <div class="cards">
-                <h2 class="cardtitle">Order-ID: 2135</h2>
+                <h2 class="cardtitle">Order-ID: <%= orders[i]._id %></h2>
 
                 <table>
                     <thead>
@@ -65,27 +66,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% for(let j=0; j< orders[i].dishes.length; j++) { %>
                         <tr>
-                            <td>Briyani</td>
-                            <td class="q1">1</td>
+                            <td><%= orders[i].dishes[j].name %></td>
+                            <td class="q1"><%= orders[i].dishes[j].qunt %></td>
                         </tr>
-                        <tr>
-                            <td>Chapathi</td>
-                            <td class="q1">4</td>
-                        </tr>
-                        <tr>
-                            <td>Parotta</td>
-                            <td class="q1">3</td>
-                        </tr>
+                        <% } %>
                     </tbody>
                 </table>
                 <button class="cardbtn2" type="button">Cooking</button>
                 <button class="cardbtn" type="button">prepared</button>
 
             </div>
+            <% } %>
 
-
-
+<!-- 
                 <div class="cards cards1">
                     <h2 class="cardtitle">Order-ID: 2135</h2>
 
@@ -144,7 +139,7 @@
                     <button class="cardbtn2" type="button">Cooking</button>
                     <button class="cardbtn" type="button">prepared</button>
 
-                </div>
+                </div> -->
 
 
 

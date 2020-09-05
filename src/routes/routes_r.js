@@ -164,8 +164,11 @@ router.get('/dishform', isRestaurant, (req, res)=>{
     res.render('restaurant/dish_form');   
 });
 
-router.get('/orders', isRestaurant, (req, res)=>{
-    res.render('restaurant/orders_r');
+router.get('/orders', isRestaurant, async (req, res)=>{
+    let orders =[]
+    orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add}).toArray();
+
+    res.render('restaurant/orders_r', { orders: orders});
 });
 
 // router.get('/csv', (req, res)=>{

@@ -81,12 +81,9 @@ const placeOrder= async (req)=>{
 };
 
 app.post('/placeorder', (req, res)=>{
-    let data = req.body;
-    // console.log(req);
-    // console.log(data);
-    // console.log(req.file);
+ 
     placeOrder(req).then(_=>res.status(200).send("Order placed successfully")).catch(_=>res.status(500).send("Order placed was not placed"));
-    // res.redirect('/');
+
 });
 
 
