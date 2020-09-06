@@ -90,6 +90,8 @@ D2G = {
 
       console.log("Paid", res) 
 
+      let totQunt = 0
+      dishes.forEach(dish=>totQunt+=parseInt(dish.qunt))
 
       $.ajax({
         url:`${HOST}placeorder`,
@@ -102,7 +104,8 @@ D2G = {
           address: $('#cus-address').val(),
           phone: $('#cus-phone').val(),
           customer_name: $('#cus-name').val(),
-          dishes: dishes                
+          dishes: dishes                ,
+          totQunt: totQunt
       }),
         contentType: 'application/json',
         success:(result)=>{

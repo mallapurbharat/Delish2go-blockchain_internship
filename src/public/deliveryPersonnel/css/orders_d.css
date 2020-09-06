@@ -1,0 +1,111 @@
+/* navbar section  */
+
+#navbar {
+  position: relative;
+}
+
+.space {
+  width: 50px;
+}
+
+i {
+  color: #fff;
+}
+
+.linkClass {
+  color: #fff;
+  font-size: 25px;
+}
+
+.linkClass:hover {
+  text-decoration: none;
+}
+
+.logoColor {
+  color: #fff;
+}
+
+.content {
+  padding-top: 100px;
+}
+
+.content h1 {
+  color: #3399ff;
+  font-family: "Catamaran", sans-serif;
+  font-size: 75px;
+}
+
+.contenti {
+  color: #3399ff;
+}
+
+/* orders div */
+
+.orders {
+  position: relative;
+  left: 100px;
+  top: 100px;
+}
+
+.cards {
+  width: 280px;
+  height: 350px;
+  background-color: rgb(252, 252, 252);
+  box-shadow: 1px 1px 20px 1px rgb(197, 195, 195);
+  display: inline-block;
+  margin-top: 40px;
+  padding: 10px;
+}
+
+.cards1 {
+  margin-left: 70px;
+}
+
+.cards2 {
+  margin-left: 70px;
+}
+
+.cardtitle {
+  text-align: center;
+}
+
+table {
+  margin-left: 5px;
+}
+.q1 {
+  padding-left: 30px;
+  text-align: center;
+}
+
+.cardbtn {
+  background-color: #c82333;
+  color: white;
+  border: none;
+  padding: 9px;
+  border-radius: 4px;
+  font-size: 15px;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.cardbtn2 {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 9px;
+  border-radius: 4px;
+  font-size: 15px;
+  margin-left: 100px;
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.leftc {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.rightc {
+  font-size: 15px;
+  padding-left: 40px;
+}

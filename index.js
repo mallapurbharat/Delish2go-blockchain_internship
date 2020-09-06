@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/restaurant', require('./src/routes/routes_r'));
-app.use('/customer', require('./src/routes/routes_r'));
+app.use('/deliveryPersonnel', require('./src/routes/routes_d'));
 
 
 // ############ routes ####################
@@ -83,7 +83,8 @@ const placeOrder= async (req)=>{
         address: req.body.address,
         phone: req.body.phone,
         customer_name: req.body.customer_name,
-        dishes: req.body.dishes                
+        dishes: req.body.dishes,
+        totQunt: req.body.totQunt
     };
     
     return mongo.put(mongo.ORDER, order);

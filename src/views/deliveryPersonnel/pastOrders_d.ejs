@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delivery Person Dashboard</title>
+
+    <!-- css  -->
+    <link rel="stylesheet" href="/deliveryPersonnel/css/orders_d.css" />
+
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css"
+    />
+
+    <link rel="shortcut icon" href="fork.png" type="image/x-icon" />
+
+    <!-- google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/27f6149baa.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar">
+      <div
+        uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
+      >
+        <div class="uk-position-relative">
+          <div class="uk-position-top">
+            <nav
+              style="background-color: #3399ff"
+              class="uk-navbar-container"
+              uk-navbar
+            >
+              <div class="uk-navbar-item">
+                <h1 class="logoColor">
+                  <i class="fas fa-utensils"></i> Delivery Person Dashboard
+                </h1>
+              </div>
+              <div class="uk-navbar-right">
+                <div class="uk-navbar-item">
+                  <a class="linkClass" href="index.html">Orders</a>
+                </div>
+                <div class="uk-navbar-item">
+                  <a class="linkClass" href="pastOrders.html">Past orders</a>
+                </div>
+                <div class="uk-navbar-item space"></div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="orders">
+      <div
+        class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center"
+        uk-grid
+      >
+
+        <% for(let i=0; i< orders.length; i++) { %>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: <%= orders[i]._id %></h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    <%= orders[i].restaurant_name %> , <%= orders[i].restaurant_address %>,
+                    phone :<%= orders[i].restaurant_phone %>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    <%= orders[i].name %> , <%= orders[i].address %>, phone :<%= orders[i].phone %>.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc"><%= orders[i].totQunt %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <% } %>
+
+
+        <!-- <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <div class="ordcontent">
+              <table>
+                <tr>
+                  <td class="leftc">Restaurant Details</td>
+                  <td class="rightc">
+                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Customer Details</td>
+                  <td class="rightc">
+                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
+                    Coimbatore.
+                  </td>
+                </tr>
+                <tr>
+                  <td class="leftc">Food Quantity</td>
+                  <td class="rightc">8</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>

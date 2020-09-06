@@ -1,6 +1,6 @@
 // const { delete } = require("../../../routes/routes_r");
 
-let billAmount=0;
+let billAmount=20;
 let dishDetails='';
 let dishes=null;
 
@@ -16,6 +16,7 @@ $(document).ready(_=> {
         delete dish.img;
         // dishList.push(dish)
     })
+    dishesContainer.append(`<li>Delivery charges = &#8377 20</li>`)
     
     
     $('.bill-amount').html(billAmount);

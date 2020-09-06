@@ -2,6 +2,8 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://dbadmin:admindb@cluster0.6ihi0.mongodb.net/delish2go?retryWrites=true&w=majority";
 let db = null;
 
+const ORDER_STATUS = { PENDING:1, ACCEPTED:2, READY:3, OUT_FOR_DELIVERY:4, DELIVERED:5 }
+
 const init = ()=>{
 
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -50,6 +52,8 @@ module.exports ={
     CITY:'city',
     DISH:'dish',
     ORDER:'order',
+    DELIVERY_PERSONNEL: 'delivery_personnel',
+    ORDER_STATUS: ORDER_STATUS,
     default: init,
     put: put,
     get: get,

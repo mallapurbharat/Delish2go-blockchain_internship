@@ -166,7 +166,7 @@ router.get('/dishform', isRestaurant, (req, res)=>{
 
 router.get('/orders', isRestaurant, async (req, res)=>{
     let orders =[]
-    orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add}).toArray();
+    orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add }).toArray();
 
     res.render('restaurant/orders_r', { orders: orders});
 });
