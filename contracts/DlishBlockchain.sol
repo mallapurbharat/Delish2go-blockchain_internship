@@ -1,5 +1,6 @@
 pragma solidity ^0.6.0;
 
+
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
 
 contract DlishBlockchain {
@@ -73,7 +74,7 @@ contract DlishBlockchain {
         RestauratsList.push(msg.sender);
     }
     
-    function RegisterDeliveryPerson() public isNotDeliveryPerson isNotRestaurant{
+    function RegisterDeliveryPerson() public isNotDeliveryPerson {
         deliveryperson[msg.sender] = true;
         DeliveryPersonList.push(msg.sender);
     }

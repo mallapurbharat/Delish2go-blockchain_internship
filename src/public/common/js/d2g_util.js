@@ -14,10 +14,12 @@ D2G = {
         // Request account access
         await window.ethereum.enable();
 
-        web3.eth.getAccounts((err, accounts)=>{
+        web3.eth.getAccounts(async (err, accounts)=>{
           let date = new Date();
-          date.setTime(date.getTime() + (2*60*60 * 1000));
-          $.cookie('res_acc_add', accounts[0], { expires: date })
+          date.setTime(date.getTime() + (2*60*60 * 1000)); // expires in 2 hrs
+          // alert(accounts[0])
+          $.cookie('res_acc_add', accounts[0], { expires: date , path: '/'})
+          $.cookie('del_acc_add', accounts[0], { expires: date , path: '/'})
         });
       } catch (error) {
         // User denied account access...
@@ -82,8 +84,8 @@ D2G = {
       console.log("Approved", res_acc_add, amount, account) 
 
       
-      // res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, {from: account, gas:4712388}).catch(err=>console.log(err))
-      // console.log("Paid", res) 
+      res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, {from: account, gas:4712388}).catch(err=>console.log(err))
+      console.log("Paid", res) 
       if(!res)
         return false
         // return Promise.reject('Invalid amount or wallet not unlocked')//new Error('Invalid amount or wallet not unlocked'))
@@ -117,6 +119,52 @@ D2G = {
 
       return true
       // return Promise.resolve('Order placed successfully in blockchan')
+     
+    })
+  },
+
+  registerDeliveryPersonnel: ()=>{
+    let DlishBlockchainInstance;
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      err ? console.log(err) : null;
+
+      let account = accounts[0];
+      // alert(account)
+      
+      DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
+
+      
+      
+      res = await DlishBlockchainInstance.RegisterDeliveryPerson({from: account, gas:4712388}).catch(err=>console.log(err))
+      
+      if(!res)
+        return false
+        
+
+      console.log("Delivery Personnel Registered successfully", res) 
+
+     
+
+      $.ajax({
+        url:`${HOST}deliveryPersonnel/register`,
+        method: 'POST',
+        data:JSON.stringify({            
+          deliverPersonnel_add: account,          
+          deliveryPersonnel_name: $('#del-name').val(),
+          phone: $('#del-phone').val(),
+          city: $('#del-city').val(),
+      }),
+        contentType: 'application/json',
+        success:(result)=>{
+          console.log("data sent")
+          alert(result)
+          window.location.href='/deliveryPersonnel/'
+        }
+        });
+
+      return true
+      
      
     })
   }

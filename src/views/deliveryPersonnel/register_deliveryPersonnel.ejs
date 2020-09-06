@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+     <script
+  src="https://cdn.jsdelivr.net/npm/@portis/web3@2.0.0-beta.56/umd/index.js"
+  integrity="sha256-YglsZuKbHpe2+U4HYCd3juAiADRTU7Ys2AGfCGY+Nmo="
+  crossorigin="anonymous"
+></script>
+
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <div class="card">                  
+                    <div class="row">
+
+                        <div class="input-field col s12">
+                            <input type="text" name="deliveryPersonnel_name" id="del-name" class="name">
+                            <label for="del-name">Delivery Personnel Name</label>                    
+                        </div>
+
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">phone</i>
+                            <input type="tel" name="phone" id="del-phone" class="validate">
+                            <label for="del-phone">Phone</label>                    
+                        </div>                 
+
+                        <div class="input-field col s6">
+                            <!-- <input type="text"> -->
+                            
+                            <select name="city" id="del-city" >
+                                <option value="" disabled selected>Choose City</option>
+                                <% for(let i=0; i<cities.length; i++) {%>
+                                    <option value="<%= cities[i] %>"><%= cities[i] %></option>
+                                <% } %>
+                            </select>
+                            <label for="">City</label>                    
+                        </div>                       
+                        
+                        <div class="col s12">
+                            <button class="register-btn btn blue">Register</button>
+                        </div>
+                    </div>                                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <input type="text" class="name">
+    <button class="submit">submit</button> -->
+    <div><ul class="list"><li class="l-element"></li></ul></div>
+
+    <script src="/common/js/portis.js"></script>
+    <script src="/common/js/web3.min.js"></script>
+    <script src="/common/js/truffle-contract.js"></script>
+    <script src="/common/js/jquery.cookie.js"></script>
+    <script src="/common/js/d2g_util.js"></script>
+    <script src="/deliveryPersonnel/js/register_d.js"></script>
+    
+</body>
+</html>

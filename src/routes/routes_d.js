@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const mongo = require('../util/mongo');
 const { ORDER_STATUS } = mongo;
+const { isDeliveryPersonnel } = require('../util/auth');
 
 
 
-router.get('/', async (req, res)=>{
+router.get('/', isDeliveryPersonnel, async (req, res)=>{
     // res.send("This the Delivery Personnel home page");
     let deliveryPersonnel = await mongo.get(mongo.DELIVERY_PERSONNEL, { _id: req.cookies.del_acc_add }).next();
     let restaurants = []
@@ -41,10 +42,45 @@ router.get('/', async (req, res)=>{
 });
 
 
-router.get('/pastOrders', async (req, res)=>{
+router.get('/pastOrders', isDeliveryPersonnel, async (req, res)=>{
     orders = await mongo.get(mongo.ORDER, { deliveryPersonnel_add: req.body.del_acc_add, status: ORDER_STATUS.ACCEPTED }).toArray();
 
     res.render('deliveryPersonnel/pastOrders_d', { orders: orders })
 })
+
+
+router.get('/register', async (req, res)=>{
+    let cities =[];
+
+    await mongo.get(mongo.CITY, {}).sort({ name: 1 }).forEach((city)=>{
+        
+        cities.push(city.name);
+    })
+
+    res.render('deliveryPersonnel/register_deliveryPersonnel', { cities: cities })
+})
+
+
+const registerDeliveryPersonnel= (req)=>{
+   
+    let deliveryPersonnel = {
+        _id: req.body.deliverPersonnel_add,
+        deliveryPersonnel_name: req.body.deliveryPersonnel_name,
+        phone: req.body.phone,
+        city: req.body.city,
+        isAssigned: false
+    };
+    
+    return mongo.put(mongo.DELIVERY_PERSONNEL, deliveryPersonnel);
+};
+
+router.post('/register', (req, res)=>{
+    let data = req.body;
+    // console.log(req);
+    // console.log(data);
+    // console.log(req.file);
+    registerDeliveryPersonnel(req);
+    res.end();
+});
 
 module.exports = router;

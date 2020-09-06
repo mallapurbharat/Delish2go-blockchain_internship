@@ -17,6 +17,25 @@ const isRestaurant = async (req, res, next)=>{
     }
 };
 
+
+const isDeliveryPersonnel = async (req, res, next)=>{
+    let del_acc_add = req.cookies.del_acc_add;
+
+    if(del_acc_add==undefined)
+        res.status(401).send("Please unlock your wallet");
+    else{
+        let deliveryPersonnel  = await mongo.get(mongo.DELIVERY_PERSONNEL, { _id: del_acc_add }).toArray();
+
+        if(deliveryPersonnel.length==0)
+            res.redirect('/deliveryPersonnel/register');
+        else{
+            req.body.deliveryPersonnel = deliveryPersonnel[0];
+            next();
+        }
+    }
+};
+
 module.exports = {
-    isRestaurant: isRestaurant
+    isRestaurant: isRestaurant,
+    isDeliveryPersonnel: isDeliveryPersonnel
 }
