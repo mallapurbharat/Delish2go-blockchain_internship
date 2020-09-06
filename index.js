@@ -32,13 +32,22 @@ app.get('/', async (req, res)=>{
 
 app.get('/restaurants/:city?', async (req, res)=>{
     let restaurants = [];
+    let cities =[];
+
+    await mongo.get(mongo.CITY, {}).sort({ name: 1 }).forEach((city)=>{
+        
+        cities.push(city.name);
+    })
 
     if(req.params.city)
         restaurants = await mongo.get(mongo.RESTAURANT, { city: req.params.city }).toArray();
     // console.log(restaurants);
 
     // res.json(restaurants);
-    res.render("customer/restaurants", {restaurants: restaurants});
+    res.render("customer/restaurants", {
+        restaurants: restaurants,
+        cities: cities
+    });
 });
 
 
