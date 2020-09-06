@@ -73,11 +73,17 @@
 
 
 
-                    <select id="selectValue">
+                    <!-- <select id="selectValue">
                         <option value="Coimbatore">Coimbatore</option>
                         <option value="Bangalore">Bangalore</option>
                         <option value="Chennai">Chennai</option>
                         <option value="Mumbai">Mumbai</option>
+                    </select> -->
+                     <select name="city" id="selectValue" >
+                        <option value="" disabled selected>Choose City</option>
+                        <% for(let i=0; i<cities.length; i++) {%>
+                            <option value="<%= cities[i] %>"><%= cities[i] %></option>
+                        <% } %>
                     </select>
                     <button class="homebtn" type="button" onclick="resValue()">Search</button>
 
