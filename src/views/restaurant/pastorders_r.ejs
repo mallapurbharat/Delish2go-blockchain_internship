@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RestaurantDashboard</title>
+
+    <!-- css  -->
+    <link rel="stylesheet" href="/restaurant/css/orders_r.css" />
+
+    <!-- UIkit CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/css/uikit.min.css"
+    />
+
+    <link rel="shortcut icon" href="fork.png" type="image/x-icon" />
+
+    <!-- google fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/27f6149baa.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar">
+      <div
+        uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
+      >
+        <div class="uk-position-relative">
+          <div class="uk-position-top">
+            <nav
+              style="background-color: #3399ff"
+              class="uk-navbar-container"
+              uk-navbar
+            >
+              <div class="uk-navbar-item">
+                <h1 class="logoColor">
+                  <i class="fas fa-utensils"></i> Restaurant Dashboard
+                </h1>
+              </div>
+              <div class="uk-navbar-right">
+                <div class="uk-navbar-item">
+                  <a class="linkClass" href="/restaurant/menu">Dishes</a>
+                </div>
+                <div class="uk-navbar-item">
+                  <a class="linkClass" href="/restaurant/orders"
+                    >Current Orders</a
+                  >
+                </div>
+                <div class="uk-navbar-item">
+                  <a class="linkClass" href="#">Past Orders</a>
+                </div>
+                <div class="uk-navbar-item space"></div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="orders">
+      <div
+        class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center"
+        uk-grid
+      >
+        <% for(let i=0; i< orders.length; i++) { %>
+        <div>
+          <div class="cards">
+            <h2 class="cardtitle">Order-ID: <%= orders[i]._id %></h2>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Dish name</th>
+                  <th class="q1">quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let j=0; j< orders[i].dishes.length; j++) { %>
+                <tr>
+                  <td><%= orders[i].dishes[j].name %></td>
+                  <td class="q1"><%= orders[i].dishes[j].qunt %></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+            <!-- <button class="cardbtn2" type="button">Cooking</button> -->
+            <!-- <button class="cardbtn" type="button">prepared</button> -->
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

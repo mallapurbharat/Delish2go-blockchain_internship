@@ -569,7 +569,15 @@ body {
 
 
 
-
+.ms{
+  color:#3399ff;
+  padding: 5px;
+  border: 1px solid #3399ff;
+  background-color: #fff;
+  font-size: 15px;
+  border-radius: 3px;
+  width: 80px;
+}
 
 
 
@@ -604,17 +612,24 @@ body {
   <ul>
   <li><a class="active" href="#home"><img src="/common/img/home/fork.png" width="40" height="40">DelishtoGo</a></li>
 
-  <li style="float:right"><form>
-  <select class="navbars" name="city" id="city">
+  <li style="float:right">
+
+  <!-- <select class="navbars" name="city" id="city">
     <option value="Erode">Erode</option>
     <option value="Coimbatore">Coimbatore</option>
     <option value="Chennai">Chennai</option>
     <option value="Madurai">Madurai</option>
 
   </select>
-  <br><br>
-  <input class="navbarbtn" type="submit" value="Submit">
-</form></li>
+  <input class="navbarbtn" type="submit" value="Submit"> -->
+
+  <select class="navbars" name="city" id="selectValue" >
+    <% for(let i=0; i<cities.length; i++) {%>
+        <option value="<%= cities[i] %>"><%= cities[i] %></option>
+    <% } %>
+    </select>
+    <button class="navbarbtn" type="button" onclick="gotorestaurants()">Search</button>
+</li>
 </ul>
 
 <div class="ripple-background"></div>
@@ -666,6 +681,11 @@ body {
     var mychild = myparent.children()[0];
     dishurl = mychild.getAttribute('restaurant_id')
     window.location.href = `http://localhost:3000/menu/${dishurl}`;
+  }
+
+  function gotorestaurants() {
+    var City = document.querySelector("#selectValue");
+    window.location.href = `http://localhost:3000/restaurants/${City.value}`;
   }
 
   var urls = window.location.href.split("/");

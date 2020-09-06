@@ -39,7 +39,10 @@
                             <a class="linkClass" href="/restaurant/menu">Dishes</a>
                         </div>
                         <div class="uk-navbar-item">
-                            <a class="linkClass" href="/restaurant/orders">Orders</a>
+                            <a class="linkClass" href="/restaurant/orders">Current Orders</a>
+                        </div>
+                        <div class="uk-navbar-item">
+                            <a class="linkClass" href="#">Past Orders</a>
                         </div>
                         <div class="uk-navbar-item space">
 
@@ -53,23 +56,26 @@
 
     </div>
 
-    
-    <div class="dcards">
-        <% for(let i=0; i<dishes.length; i++) { %>
-            <div class="dishescard1">
-                <div class="imgcard">
-                    <img src="data:<%= dishes[i].img.mimetype %>;base64,<%= dishes[i].img.data.toString('base64') %>" alt="img">
-                </div>
-                <div class="cardcontent">
-                    <h2><%= dishes[i].dish_name %></h2>
-                    <p><%= dishes[i].description %></p>
-                    &#8377<span><%= dishes[i].price %></span>
-                    <button class="btnedit" type="button">Edit</button>
-                    <button class="btndelete" type="button">Delete</button>
 
+    <div class="dcards">
+        <div class="uk-grid-column-small uk-grid-row-large uk-child-width-1-2@s uk-text-center" uk-grid>
+        <% for(let i=0; i<dishes.length; i++) { %>
+            <div>
+                <div class="dishescard1">
+                    <div class="imgcard">
+                        <img style="width: 250px; height: 200px;" src="data:<%= dishes[i].img.mimetype %>;base64,<%= dishes[i].img.data.toString('base64') %>" alt="img">
+                    </div>
+                    <div class="cardcontent">
+                        <h2><%= dishes[i].dish_name %></h2>
+                        <p><%= dishes[i].description %></p>
+                        <span>&#8377 <%= dishes[i].price %></span>
+                        <button class="btnedit" type="button">Edit</button>
+                        <button class="btndelete" type="button">Delete</button>
+                    </div>
                 </div>
             </div>
         <% } %>
+        </div>
         <!-- <div class="dishescard1 dc2">
             <div class="imgcard">
                 <img src="/restaurant/img/menu/01.jpg" alt="img">
