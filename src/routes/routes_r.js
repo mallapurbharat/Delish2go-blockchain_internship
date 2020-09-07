@@ -90,7 +90,7 @@ router.post('/register', restaurantImgUpload.single('img'), (req, res)=>{
     // console.log(data);
     // console.log(req.file);
     registerRestaurant(req);
-    res.end();
+    res.status(200).send("Restaurant registered successfully")
 });
 
 

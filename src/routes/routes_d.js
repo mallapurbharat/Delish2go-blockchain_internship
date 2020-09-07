@@ -77,7 +77,14 @@ const registerDeliveryPersonnel= (req)=>{
 router.post('/register', (req, res)=>{
 
     registerDeliveryPersonnel(req);
-    res.end();
+    res.status(200).send("Delivery Personnel registered successfully")
 });
+
+
+router.post('/acceptOrder', isDeliveryPersonnel, (req, res)=>{
+    mongo.update(mongo.DELIVERY_PERSONNEL, { _id: req.body.del_acc_add }, { isAssigned: true })
+    mongo.update(mongo.ORDER, { _id: req.body.orderId }, { deliveryPersonal_add: req.body.del_acc_add })
+    res.status(200).send("Order accepted")
+})
 
 module.exports = router;

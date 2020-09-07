@@ -183,7 +183,11 @@ D2G = {
               data:formData,
               processData: false,
               contentType: false,
-              success:()=>console.log("data sent")
+              success:(result)=>{
+                console.log("data sent")
+                alert(result)
+                window.location.href='/restaurant/'
+              }
             });
           })
         return D2G.Restaurants();
@@ -233,6 +237,52 @@ D2G = {
           console.log("data sent")
           alert(result)
           window.location.href='/deliveryPersonnel/'
+        }
+        });
+
+      return true
+      
+     
+    })
+  },
+
+
+  acceptOrder: orderId=>{
+    let DlishBlockchainInstance;
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      err ? console.log(err) : null;
+
+      D2G.setCookies(accounts[0])
+
+      let account = accounts[0];
+      // alert(account)
+      
+      DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
+
+      
+      
+      res = await DlishBlockchainInstance.AcceptOrder({from: account, gas:4712388}).catch(err=>console.log(err))
+      
+      if(!res)
+        return false
+        
+
+      console.log("Order accepted successfully", res) 
+
+     
+
+      $.ajax({
+        url:`${HOST}deliveryPersonnel/acceptOrder`,
+        method: 'POST',
+        data:JSON.stringify({            
+          deliverPersonnel_add: account,          
+          accept: true,
+          orderId: orderId          
+      }),
+        contentType: 'application/json',
+        success:(result)=>{
+          console.log("data sent")
         }
         });
 
