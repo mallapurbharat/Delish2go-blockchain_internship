@@ -75,10 +75,7 @@ const registerDeliveryPersonnel= (req)=>{
 };
 
 router.post('/register', (req, res)=>{
-    let data = req.body;
-    // console.log(req);
-    // console.log(data);
-    // console.log(req.file);
+
     registerDeliveryPersonnel(req);
     res.end();
 });

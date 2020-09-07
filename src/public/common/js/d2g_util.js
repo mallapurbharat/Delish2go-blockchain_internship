@@ -11,15 +11,14 @@ D2G = {
     if (window.ethereum) {
       D2G.web3Provider = window.ethereum;
       try {
+        //delete cookies if exists
+        D2G.setCookies()
+
         // Request account access
         await window.ethereum.enable();
 
         web3.eth.getAccounts(async (err, accounts)=>{
-          let date = new Date();
-          date.setTime(date.getTime() + (2*60*60 * 1000)); // expires in 2 hrs
-          // alert(accounts[0])
-          $.cookie('res_acc_add', accounts[0], { expires: date , path: '/'})
-          $.cookie('del_acc_add', accounts[0], { expires: date , path: '/'})
+          D2G.setCookies(accounts[0])
         });
       } catch (error) {
         // User denied account access...
@@ -61,6 +60,22 @@ D2G = {
 
     return D2G.callback();
   },
+
+  setCookies: account=>{
+    console.log(account)
+    if(account){
+      let date = new Date();
+      date.setTime(date.getTime() + (2*60*60 * 1000)); // expires in 2 hrs
+      // alert(accounts[0])
+      $.cookie('res_acc_add', account, { expires: date , path: '/'})
+      $.cookie('del_acc_add', account, { expires: date , path: '/'})
+    }
+    else{
+      $.removeCookie('res_acc_add', { path: '/'})
+      $.removeCookie('del_acc_add', { path: '/'})
+    }
+    
+  },
   
   placeOrder: async (res_acc_add, amount, dishDetails, dishes)=>{
 
@@ -70,6 +85,8 @@ D2G = {
 
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
+
+      D2G.setCookies(accounts[0])
 
       let account = accounts[0];
       d2gTokenInstance = await D2G.contracts.DlishToken.deployed();
@@ -123,11 +140,67 @@ D2G = {
     })
   },
 
+
+  registerRestaurant: ()=>{
+    let DlishBlockchainInstance;
+  
+      web3.eth.getAccounts(function(error, accounts) {
+      if (error) {
+        console.log(error);
+      }
+    
+      D2G.setCookies(accounts[0])
+
+      let account = accounts[0];
+    
+      D2G.contracts.DlishBlockchain.deployed().then(function(instance) {
+        DlishBlockchainInstance = instance;
+    
+        
+        return DlishBlockchainInstance.restaurant(account);
+      }).then(function(result) {
+        console.log(`The account ${account} is : ${result}`);
+
+        if(!result)
+          return DlishBlockchainInstance.RegisterRestaurant({from: account, gas:1000000}).then((res)=>{
+          // let account = '0x616f0E1743174CCC777c08286724c67aED3907aA';
+            let formData = new FormData();
+            formData.append('res_acc_address',account);
+            formData.append('restaurant_name', $("#res-name").val());
+            formData.append('img', $("#res-img")[0].files[0], $("#res-img").prop('files')[0].name);
+            formData.append('phone', $("#res-phone").val());
+            formData.append('city', $("#res-city").val());
+            formData.append('address', $("#res-address").val());
+            formData.append('type', $("#res-type").val());
+            formData.append('start_time', $("#start-time").val());
+            formData.append('close_time', $("#close-time").val());
+            formData.append('holiday', $("#res-holiday").val());
+            
+            
+            $.ajax({
+              url:`${HOST}restaurant/register`,
+              method: 'POST',
+              data:formData,
+              processData: false,
+              contentType: false,
+              success:()=>console.log("data sent")
+            });
+          })
+        return D2G.Restaurants();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+  });
+  },
+
+
   registerDeliveryPersonnel: ()=>{
     let DlishBlockchainInstance;
 
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
+
+      D2G.setCookies(accounts[0])
 
       let account = accounts[0];
       // alert(account)

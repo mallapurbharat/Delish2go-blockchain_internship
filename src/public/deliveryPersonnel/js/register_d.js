@@ -7,9 +7,3 @@
         await D2G.registerDeliveryPersonnel()
       })
   });
-  // $(function() {
-  //   $(window).load(function() {
-  //     App.init();
-  //   });
-  // });
-  
