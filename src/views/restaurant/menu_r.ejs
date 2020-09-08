@@ -16,6 +16,7 @@
         <!-- google fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;1,600&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/27f6149baa.js" crossorigin="anonymous"></script>
@@ -23,6 +24,15 @@
         <!-- UIkit JS -->
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </head>
 <body>
@@ -42,7 +52,7 @@
                             <a class="linkClass" href="/restaurant/orders">Current Orders</a>
                         </div>
                         <div class="uk-navbar-item">
-                            <a class="linkClass" href="#">Past Orders</a>
+                            <a class="linkClass" href="/restaurant/pastOrders">Past Orders</a>
                         </div>
                         <div class="uk-navbar-item space">
 
@@ -66,8 +76,8 @@
                         <img style="width: 250px; height: 200px;" src="data:<%= dishes[i].img.mimetype %>;base64,<%= dishes[i].img.data.toString('base64') %>" alt="img">
                     </div>
                     <div class="cardcontent">
-                        <h2><%= dishes[i].dish_name %></h2>
-                        <p><%= dishes[i].description %></p>
+                        <h2 class="uk-text-left uk-margin-left" dishId="<%= dishes[i]._id %>"><%= dishes[i].dish_name %></h2>
+                        <p class="uk-text-left uk-margin-left"><%= dishes[i].description %></p>
                         <span>&#8377 <%= dishes[i].price %></span>
                         <button class="btnedit" type="button">Edit</button>
                         <button class="btndelete" type="button">Delete</button>
@@ -75,62 +85,65 @@
                 </div>
             </div>
         <% } %>
-        </div>
-        <!-- <div class="dishescard1 dc2">
-            <div class="imgcard">
-                <img src="/restaurant/img/menu/01.jpg" alt="img">
-            </div>
-            <div class="cardcontent">
-                <h2>Paneer Butter Masala</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                &#8377<span>190</span>
-                <button class="btnedit" type="button">Edit</button>
-                <button class="btndelete" type="button">Delete</button>
-
-            </div>
-        </div>
-
-        <div class="dishescard1">
-            <div class="imgcard">
-                <img src="/restaurant/img/menu/01.jpg" alt="img">
-            </div>
-            <div class="cardcontent">
-                <h2>Paneer Butter Masala</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                &#8377<span>190</span>
-                <button class="btnedit" type="button">Edit</button>
-                <button class="btndelete" type="button">Delete</button>
-
-            </div>
-        </div>
-        <div class="dishescard1 dc2">
-            <div class="imgcard">
-                <img src="/restaurant/img/menu/01.jpg" alt="img">
-            </div>
-            <div class="cardcontent">
-                <h2>Paneer Butter Masala</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                &#8377<span>190</span>
-                <button class="btnedit" type="button">Edit</button>
-                <button class="btndelete" type="button">Delete</button>
-
-            </div>
-        </div>
-        <div class="dishescard1">
-            <div class="imgcard">
-                <img src="/restaurant/img/menu/01.jpg" alt="img">
-            </div>
-            <div class="cardcontent">
-                <h2>Paneer Butter Masala</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                &#8377<span>190</span>
-                <button class="btnedit" type="button">Edit</button>
-                <button class="btndelete" type="button">Delete</button>
-
-            </div>
-        </div> -->
+        </div>        
     </div>
 
 
+    <div id="dish-form-card" style="display: none;">
+        <div class="card">
+          <div class="close-btn"><i class="material-icons">close</i></div>
+
+          <div class="row">
+  
+             <div class="col s12"><h4>Dish</h4></div>
+             <div class="col s3"><div style="width: 100%; border-top: solid #5aa2e8;"></div></div>
+            
+              <div class="col s12 input-field">
+                  <input type="text" id="dish-name">
+                  <label for="dish-name">Dish Name</label>
+              </div>
+  
+              <div class="col s6 input-field">
+                  <input type="text" id="dish-price">
+                  <label for="dish-price">Price</label>
+              </div>
+  
+              <div class="col s6 input-field">
+                  <select  id="dish-type" >
+                      <option value="" disabled selected>Choose Type</option>
+                      <option value="veg">Veg</option>
+                      <option value="non veg">Non Veg</option>
+                    </select>
+                  <label for="dish-type">Type</label>
+              </div>
+  
+              <div class="file-field input-field col s12">
+                  <div class="btn">
+                  <span>Image</span>
+                  <input type="file" name="dish_img" id="dish-img">
+                  </div>
+                  <div class="file-path-wrapper">
+                  <input class="file-path validate" name="dish_img_name" type="text">
+                  </div>
+              </div>
+  
+              <div class="col s12 input-field">
+                  <input type="text" id="dish-des">
+                  <label for="dish-des">Description</label>
+              </div>
+  
+              <button class="btn green" id="dish-add-btn">Add Dish</button>
+              
+          </div>
+        </div>
+      </div>
+
+      <div class="add-btn" >
+        <i class="material-icons">add</i>
+    </div>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+    <script src="/restaurant/js/menu_r.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
 </body>
 </html>

@@ -33,10 +33,35 @@ const  get =  (collec, query, fields)=>{
     return  fields ? collection.find(query, fields) : collection.find(query);  
 };
 
+const deleteOne = (collec, data)=>{
+    const collection = db.collection(collec);
+    return collection.deleteOne(data).then(res=>{
+        console.log("deleted data id: ", res.deletedCount);
+        return 0;
+    }).catch(err=>{
+        console.log("Failed to deleted ", err);
+        return 1;
+    });
+};
+
 const update = (collec, query, data)=>{
     const collection = db.collection(collec);
 
     return collection.updateOne(query, {$set:data}).then(res=>{
+        console.log(res.matchedCount," data updated: ");
+        if(res.matchedCount==1)
+            return 0;
+        return 2;
+    }).catch(err=>{
+        console.log("Failed to update ", err);
+        return 1;
+    });
+};
+
+const updateArray = (collec, query, data_operation)=>{
+    const collection = db.collection(collec);
+
+    return collection.updateOne(query, data_operation).then(res=>{
         console.log(res.matchedCount," data updated: ");
         if(res.matchedCount==1)
             return 0;
@@ -57,6 +82,8 @@ module.exports ={
     default: init,
     put: put,
     get: get,
-    update: update
+    update: update,
+    updateArray: updateArray,
+    deleteOne: deleteOne
 };
 // export default mongo;

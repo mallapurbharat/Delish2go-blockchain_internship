@@ -117,7 +117,7 @@ router.get('/menu', isRestaurant, async (req, res)=>{
     // res.render('restaurant/menu_r');
 });
 
-const UCDish=(req)=>{
+const UCDish= async (req)=>{
     let img_data
     try{
         img_data = fs.readFileSync(`${ UPLOADS_PATH }${ req.body.filename }`)
@@ -143,7 +143,9 @@ const UCDish=(req)=>{
         return mongo.update(mongo.DISH, { _id:req.body.dish_id }, dish);
       
     dish['_id']=uuidv4();
-    // return mongo.put(mongo.DISH, dish);
+    await mongo.put(mongo.DISH, dish);
+
+    return mongo.updateArray(mongo.RESTAURANT, { _id: req.cookies.res_acc_add }, { $push:{ dish_ids: dish._id } })
 };
 
 router.post('/UCDish', isRestaurant, dishImgUpload.single('img'), (req, res)=>{
@@ -159,6 +161,17 @@ router.post('/UCDish', isRestaurant, dishImgUpload.single('img'), (req, res)=>{
     });
     
 });
+
+
+router.post('/deleteDish', isRestaurant, async (req, res)=>{
+    let resu = await mongo.updateArray(mongo.RESTAURANT, { _id: req.cookies.res_acc_add }, { $pull: { dish_ids: req.body.dishId }})
+    resu = await mongo.deleteOne(mongo.DISH, { _id: req.body.dishId })
+
+    if(resu!=undefined)
+        res.status(200).send(`Dish deleted successfully`)
+    else
+        res.status(500).send(`Unable to delete`)
+})
 
 
 router.get('/dishform', isRestaurant, (req, res)=>{
