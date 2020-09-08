@@ -13,88 +13,103 @@
   crossorigin="anonymous"
 ></script>
 
-     <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <!-- Custom CSS -->
+     <link rel="stylesheet" href="/restaurant/css/register_restaurant.css">
 
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
 </head>
 <body>
+    <div class="bg-img"><img src="/restaurant/img/register/img.jpg" alt=""></div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col s6">
-                <div class="card">                  
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" name="restaurant_name" id="res-name" class="name">
-                            <label for="res-name">Restaurant Name</label>                    
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">phone</i>
-                            <input type="tel" name="phone" id="res-phone" class="validate">
-                            <label for="res-phone">Phone</label>                    
-                        </div>
-                        <div class="input-field col s6">
-                            <!-- <input type="text" id="res-type" class=""> -->
-                            <select name="type" id="res-type" >
-                                <option value="" disabled selected>Choose Type</option>
-                                <option value="veg">Veg</option>
-                                <option value="non veg">Non Veg</option>
-                            </select>
-                            <label >Type</label>                    
-                        </div>
+    <div class="card-container">        
+        <div class="card"> 
+            <div class="row">
 
-                        <div class="input-field col s6">
-                            <input type="text" name="start_time" id="start-time" class="timepicker">
-                            <label for="start-time">Start Time</label>                    
-                        </div>
-                        <div class="input-field col s6">
-                            <input type="text" name="close_time" id="close-time" class="timepicker">
-                            <label for="close-time">Close Time</label>                    
-                        </div>
-                        <div class="input-field col s6">
-                            
-                            <select name="holiday" id="res-holiday" >
-                                <option value="" disabled selected>Choose Day</option>
-                            </select>
-                            <label for="res-holiday">Holiday</label>                    
-                        </div>
-                        <div class="input-field col s6">
-                            <!-- <input type="text"> -->
-                            
-                            <select name="city" id="res-city" >
-                                <option value="" disabled selected>Choose City</option>
-                                <% for(let i=0; i<cities.length; i++) {%>
-                                    <option value="<%= cities[i] %>"><%= cities[i] %></option>
-                                <% } %>
-                            </select>
-                            <label for="">City</label>                    
-                        </div>
-                        <div class="file-field input-field col s12">
-                            <div class="btn">
-                            <span>Image</span>
-                            <input type="file" name="res_img" id="res-img">
-                            </div>
-                            <div class="file-path-wrapper">
-                            <input class="file-path validate" name="res_img_name" type="text">
-                            </div>
-                        </div>
-                        <div class="input-field col s12">
-                            <input type="text" id="res-address" name="address" class="resAddress">
-                            <label for="res-address">Address</label>                    
-                        </div>                        
-                        
-                        <div class="col s12">
-                            <button class="register-btn btn blue">Register</button>
-                        </div>
-                    </div>                                   
+                <div class="col s12"><h5>Restaurant</h5></div>
+                <div class="col s5 divide"><div style="width: 100%; border-top: solid #5aa2e8;"></div></div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">store_mall_directory</i>
+                    <input type="text" name="restaurant_name" id="res-name" class="name">
+                    <label for="res-name">Restaurant Name</label>                    
                 </div>
-            </div>
-        </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    <input type="tel" name="phone" id="res-phone" class="validate">
+                    <label for="res-phone">Phone</label>                    
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">fastfood</i>
+                    <select name="type" id="res-type" >
+                        <option value="" disabled selected>Choose Type</option>
+                        <option value="veg">Veg</option>
+                        <option value="non veg">Non Veg</option>
+                    </select>
+                    <label >Type</label>                    
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">hourglass_top</i>
+                    <input type="text" name="start_time" id="start-time" class="timepicker">
+                    <label for="start-time">Start Time</label>                    
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">hourglass_bottom</i>
+                    <input type="text" name="close_time" id="close-time" class="timepicker">
+                    <label for="close-time">Close Time</label>                    
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">today</i>
+                    <select name="holiday" id="res-holiday" >
+                        <option value="" disabled selected>Choose Day</option>
+                    </select>
+                    <label for="res-holiday">Holiday</label>                    
+                </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">location_city</i>
+                    <select name="city" id="res-city" >
+                        <option value="" disabled selected>Choose City</option>
+                        <% for(let i=0; i<cities.length; i++) {%>
+                            <option value="<%= cities[i] %>"><%= cities[i] %></option>
+                        <% } %>
+                    </select>
+                    <label for="">City</label>                    
+                </div>
+
+                <div class="file-field input-field col s12">
+                    <!-- <i class="material-icons prefix">wallpaper</i> -->
+                    <div class="btn">
+                    <span>Image</span>
+                    <input type="file" class="blue" name="res_img" id="res-img">
+                    </div>
+                    <div class="file-path-wrapper">
+                    <input class="file-path validate" name="res_img_name" type="text">
+                    </div>
+                </div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">alternate_email</i>
+                    <input type="text" id="res-address" name="address" class="resAddress">
+                    <label for="res-address">Address</label>                    
+                </div>                        
+                
+                <div class="col s12 btn-container">
+                    <button class="register-btn btn orange">Register</button>
+                </div>
+            </div>                                   
+        </div>         
     </div>
     <!-- <input type="text" class="name">
     <button class="submit">submit</button> -->

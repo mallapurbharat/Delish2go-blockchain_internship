@@ -13,52 +13,54 @@
   crossorigin="anonymous"
 ></script>
 
-     <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/deliveryPersonnel/css/register_deliveryPersonnel.css">
 
-     <!-- Compiled and minified JavaScript -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col s6">
-                <div class="card">                  
-                    <div class="row">
+    <div class="card-container">
+        <div class="card">                  
+            <div class="row">
 
-                        <div class="input-field col s12">
-                            <input type="text" name="deliveryPersonnel_name" id="del-name" class="name">
-                            <label for="del-name">Delivery Personnel Name</label>                    
-                        </div>
+                <div class="col s12"><h4>Delivery Personnel</h4></div>
+                <div class="col s10 divide"><div style="width: 100%; border-top: solid #5aa2e8;"></div></div>
 
-                        <div class="input-field col s6">
-                            <i class="material-icons prefix">phone</i>
-                            <input type="tel" name="phone" id="del-phone" class="validate">
-                            <label for="del-phone">Phone</label>                    
-                        </div>                 
-
-                        <div class="input-field col s6">
-                            <!-- <input type="text"> -->
-                            
-                            <select name="city" id="del-city" >
-                                <option value="" disabled selected>Choose City</option>
-                                <% for(let i=0; i<cities.length; i++) {%>
-                                    <option value="<%= cities[i] %>"><%= cities[i] %></option>
-                                <% } %>
-                            </select>
-                            <label for="">City</label>                    
-                        </div>                       
-                        
-                        <div class="col s12">
-                            <button class="register-btn btn blue">Register</button>
-                        </div>
-                    </div>                                   
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">perm_identity</i>
+                    <input type="text" name="deliveryPersonnel_name" id="del-name" class="name">
+                    <label for="del-name">Delivery Personnel Name</label>                    
                 </div>
-            </div>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    <input type="tel" name="phone" id="del-phone" class="validate">
+                    <label for="del-phone">Phone</label>                    
+                </div>                 
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">location_city</i>
+                    <select name="city" id="del-city" >
+                        <option value="" disabled selected>Choose City</option>
+                        <% for(let i=0; i<cities.length; i++) {%>
+                            <option value="<%= cities[i] %>"><%= cities[i] %></option>
+                        <% } %>
+                    </select>
+                    <label for="">City</label>                    
+                </div>                       
+                
+                <div class="col s12 btn-container">
+                    <button class="register-btn btn orange">Register</button>
+                </div>
+            </div>                                   
         </div>
     </div>
     <!-- <input type="text" class="name">

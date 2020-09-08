@@ -62,7 +62,11 @@ D2G = {
       return D2G.contracts.DlishBlockchain.setProvider(D2G.web3Provider);
     });
 
-    return D2G.callback();
+    web3.eth.getAccounts((err, accounts)=>{
+      if(accounts.length!=0)
+      return D2G.callback();
+    })
+      
   },
 
   setCookies: account=>{

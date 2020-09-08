@@ -1,0 +1,49 @@
+body{
+    overflow: hidden;
+}
+
+.bg-img{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2;
+    background: #add4f5;
+}
+
+.bg-img img{
+    position: absolute;
+    top: 6em;
+    right: 6em;
+    width: 50%;
+    object-fit: contain;
+}
+
+.card-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.card{
+    width: 450px;
+    height: 680px;
+    padding: 1em 1em 2em 1em;
+    margin-bottom: 0 !important;
+}
+
+.divide{
+    margin-bottom: 1.4em;
+}
+
+.btn-container{
+    /* margin-top: 2em; */
+}
+
+.register-btn{
+    float: right;
+    font-weight: bold;
+}

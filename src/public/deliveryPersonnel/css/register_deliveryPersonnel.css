@@ -1,0 +1,31 @@
+body{
+    background-image: radial-gradient(#8cbdec, #2e7cc7);
+    height: 100vh;
+}
+
+.card-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 400px;
+    height: 380px;
+    padding: 1em 1em 2em 1em;
+}
+
+.divide{
+    margin-bottom: 1.4em;
+}
+
+.btn-container{
+    margin-top: 2em;
+}
+
+.register-btn{
+    float: right;
+    font-weight: bold;
+}
