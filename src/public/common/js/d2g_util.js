@@ -1,5 +1,5 @@
 const HOST = "http://localhost:3000/";
-// let web;
+let portis;
 D2G = {
   web3Provider: null,
   contracts: {},
@@ -32,6 +32,35 @@ D2G = {
     else {
       D2G.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
+    web3 = new Web3(D2G.web3Provider);
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      // alert(web3.toChecksumAddress(accounts[0]), accounts[0])
+      D2G.setCookies(web3.toChecksumAddress(accounts[0]))
+    });
+
+    return D2G.initContract();
+  },
+
+  initi: async function(callback) {
+    D2G.callback = callback ? callback : _=>console.log("web3 initialized");
+
+  
+      
+      
+        //delete cookies if exists
+        D2G.setCookies()
+
+        // Request account access
+        const myLocalPOANode = {
+          nodeUrl: 'http://localhost:7545',
+          chainId: 5777,
+        };
+         portis = new Portis('11c0bbc2-4860-428b-bf14-b30f8faf32fd', myLocalPOANode);
+        D2G.web3Provider = portis.provider;
+        portis.showPortis();      
+        
+      
     web3 = new Web3(D2G.web3Provider);
 
     web3.eth.getAccounts(async (err, accounts)=>{
@@ -165,12 +194,17 @@ D2G = {
       D2G.contracts.DlishBlockchain.deployed().then(function(instance) {
         DlishBlockchainInstance = instance;
     
-        alert(account)
+        // alert(account)
         return DlishBlockchainInstance.restaurant(account);
-      }).then(function(result) {
+      }).then(async function(result) {
         console.log(`The account ${account} is : ${result}`);
 
-        if(!result)
+        let delivery = await DlishBlockchainInstance.deliveryperson(account).catch(err=>console.log(err))
+
+        if(result || delivery)
+          alert(`This (${account}) account is already registered`)
+
+        else
           return DlishBlockchainInstance.RegisterRestaurant({from: account, gas:1000000}).then((res)=>{
           // let account = '0x616f0E1743174CCC777c08286724c67aED3907aA';
             let formData = new FormData();
@@ -220,11 +254,18 @@ D2G = {
       DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
 
       
+      let delivery = await DlishBlockchainInstance.deliveryperson(account).catch(err=>console.log(err))
+      let restaurant = await DlishBlockchainInstance.restaurant(account).catch(err=>console.log(err))
+      if(delivery || restaurant){
+        alert(`This (${account}) account is already registered`)
+        return false
+      }
       
       res = await DlishBlockchainInstance.RegisterDeliveryPerson({from: account, gas:4712388}).catch(err=>console.log(err))
       
+
       if(!res)
-        return false
+        return false       
         
 
       console.log("Delivery Personnel Registered successfully", res) 

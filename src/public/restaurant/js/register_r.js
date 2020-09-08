@@ -11,8 +11,10 @@
     $('.timepicker').timepicker();
     $('select').formSelect();
 
+    D2G.init()
+    // portis.showPortis(); 
     $('.register-btn').click( async _=>{
-      await D2G.init()
+      
       await D2G.registerRestaurant()
     })
   });
