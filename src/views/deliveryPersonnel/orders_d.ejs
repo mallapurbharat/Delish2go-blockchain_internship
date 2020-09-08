@@ -40,6 +40,10 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
   </head>
   <body>
     <div id="navbar">
@@ -83,31 +87,32 @@
       >
         <div>
           <div class="cards">
-            <h2 class="cardtitle">Order-ID: 2135</h2>
+            <h2 class="cardtitle" orderId="<%= orders[0]._id %>">Order-ID: <%= orders[0]._id %></h2>
             <div class="ordcontent">
               <table>
                 <tr>
                   <td class="leftc">Restaurant Details</td>
                   <td class="rightc">
-                    Hotel Le Meridiean , 762 Avinashi Road, Neelambur Village,
-                    Coimbatore.
+                    <%= orders[0].restaurant_name %> , <%= orders[0].restaurant_address %>,
+                    phone :<%= orders[0].restaurant_phone %>.
                   </td>
                 </tr>
                 <tr>
                   <td class="leftc">Customer Details</td>
                   <td class="rightc">
-                    Harish shanmugam , M-52 Nehru Nagar, Kovai pudhur ,
-                    Coimbatore.
+                    <%= orders[0].name %> , <%= orders[0].address %>, phone :<%= orders[0].phone %>.
                   </td>
                 </tr>
                 <tr>
                   <td class="leftc">Food Quantity</td>
-                  <td class="rightc">8</td>
+                  <td class="rightc"><%= orders[0].totQunt %></td>
                 </tr>
               </table>
             </div>
-            <button class="cardbtn2" type="button">Out For Delivery</button>
-
+            <button class="cardbtn2" id="outForDelivery-btn" type="button" <% if(orders[0].status==ORDER_STATUS.OUT_FOR_DELIVERY) { %> style="background-color: grey;" disabled <%}%>>Out For Delivery</button>
+            <% if(orders[0].status==ORDER_STATUS.OUT_FOR_DELIVERY) { %> 
+              <!-- <button class="cardbtn" type="button">Delivered</button> -->
+            <%}%>
           </div>
         </div>
         <div class="content">
@@ -128,7 +133,7 @@
       <% for(let i=0; i< orders.length; i++) { %>
         <div>
           <div class="cards">
-            <h2 class="cardtitle">Order-ID: <%= orders[i]._id %></h2>
+            <h2 class="cardtitle" orderId="<%= orders[i]._id %>">Order-ID: <%= orders[i]._id %></h2>
             <div class="ordcontent">
               <table>
                 <tr>
@@ -150,7 +155,7 @@
                 </tr>
               </table>
             </div>
-            <button class="cardbtn2" type="button">Accept</button>
+            <button class="cardbtn2 accept-btn" type="button">Accept</button>
             <!-- <button class="cardbtn" type="button">Decline</button> -->
           </div>
         </div>
@@ -189,6 +194,13 @@
       </div>
     </div> -->
     <% } %>
+
+    <script src="/common/js/portis.js"></script>
+    <script src="/common/js/web3.min.js"></script>
+    <script src="/common/js/truffle-contract.js"></script>
+    <script src="/common/js/jquery.cookie.js"></script>
+    <script src="/common/js/d2g_util.js"></script>
+    <script src="/deliveryPersonnel/js/orders_d.js"></script>
 
   </body>
 </html>

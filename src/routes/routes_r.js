@@ -38,6 +38,7 @@ const dishImgUpload = multer({ storage: dishImgStorage});
 const fs = require('fs');
 const csv = require('csv-parser');
 const { send } = require('process');
+const { ORDER_STATUS } = require('../util/mongo');
 
 
 
@@ -166,10 +167,17 @@ router.get('/dishform', isRestaurant, (req, res)=>{
 
 router.get('/orders', isRestaurant, async (req, res)=>{
     let orders =[]
-    orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add }).toArray();
+    orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add, status: { $in: [ORDER_STATUS.PENDING, ORDER_STATUS.ACCEPTED, ORDER_STATUS.PREPARED] } }).toArray();
 
-    res.render('restaurant/orders_r', { orders: orders});
+    res.render('restaurant/orders_r', { orders: orders });
 });
+
+router.get('/pastOrders', isRestaurant, async (req, res)=>{
+    let orders = await mongo.get(mongo.ORDER, { restaurant_add: req.cookies.res_acc_add, status: { $in:[ORDER_STATUS.OUT_FOR_DELIVERY, ORDER_STATUS.DELIVERED] } }).toArray();
+
+    res.render('restaurant/pastorders_r', { orders: orders })
+})
+
 
 // router.get('/csv', (req, res)=>{
 //     fs.createReadStream('in.csv').pipe(csv()).on('data', (row)=>{

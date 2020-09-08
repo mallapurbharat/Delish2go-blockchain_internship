@@ -1,4 +1,5 @@
 const HOST = "http://localhost:3000/";
+// let web;
 D2G = {
   web3Provider: null,
   contracts: {},
@@ -17,9 +18,7 @@ D2G = {
         // Request account access
         await window.ethereum.enable();
 
-        web3.eth.getAccounts(async (err, accounts)=>{
-          D2G.setCookies(accounts[0])
-        });
+        
       } catch (error) {
         // User denied account access...
         console.error("User denied account access")
@@ -34,6 +33,11 @@ D2G = {
       D2G.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
     web3 = new Web3(D2G.web3Provider);
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      // alert(web3.toChecksumAddress(accounts[0]), accounts[0])
+      D2G.setCookies(web3.toChecksumAddress(accounts[0]))
+    });
 
     return D2G.initContract();
   },
@@ -69,10 +73,12 @@ D2G = {
       // alert(accounts[0])
       $.cookie('res_acc_add', account, { expires: date , path: '/'})
       $.cookie('del_acc_add', account, { expires: date , path: '/'})
+      $.cookie('cus_acc_add', account, { expires: date , path: '/'})
     }
     else{
       $.removeCookie('res_acc_add', { path: '/'})
       $.removeCookie('del_acc_add', { path: '/'})
+      $.removeCookie('cus_acc_add', { path: '/'})
     }
     
   },
@@ -86,9 +92,9 @@ D2G = {
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
 
-      D2G.setCookies(accounts[0])
+      let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
 
-      let account = accounts[0];
       d2gTokenInstance = await D2G.contracts.DlishToken.deployed();
       DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
 
@@ -98,10 +104,10 @@ D2G = {
         return false
       // return Promise.reject(new Error('Failed to approve transaction'))
 
-      console.log("Approved", res_acc_add, amount, account) 
+      console.log("Approved", res_acc_add, amount, account, dishDetails) 
 
       
-      res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, {from: account, gas:4712388}).catch(err=>console.log(err))
+      res = await DlishBlockchainInstance.PlaceOrder(res_acc_add, amount, dishDetails, {from: account, gas:4712388}).catch(err=>console.log(err))
       console.log("Paid", res) 
       if(!res)
         return false
@@ -118,7 +124,7 @@ D2G = {
         data:JSON.stringify({            
           customer_add: account,
           restaurant_add: res_acc_add,
-          deliveryPersonal_add: null,
+          deliveryPersonnel_add: null,
           billAmount: amount,
           address: $('#cus-address').val(),
           phone: $('#cus-phone').val(),
@@ -149,14 +155,13 @@ D2G = {
         console.log(error);
       }
     
-      D2G.setCookies(accounts[0])
-
-      let account = accounts[0];
+       let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
     
       D2G.contracts.DlishBlockchain.deployed().then(function(instance) {
         DlishBlockchainInstance = instance;
     
-        
+        alert(account)
         return DlishBlockchainInstance.restaurant(account);
       }).then(function(result) {
         console.log(`The account ${account} is : ${result}`);
@@ -204,9 +209,8 @@ D2G = {
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
 
-      D2G.setCookies(accounts[0])
-
-      let account = accounts[0];
+      let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
       // alert(account)
       
       DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
@@ -253,16 +257,15 @@ D2G = {
     web3.eth.getAccounts(async (err, accounts)=>{
       err ? console.log(err) : null;
 
-      D2G.setCookies(accounts[0])
-
-      let account = accounts[0];
+      let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
       // alert(account)
       
       DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
 
       
       
-      res = await DlishBlockchainInstance.AcceptOrder({from: account, gas:4712388}).catch(err=>console.log(err))
+      res = await DlishBlockchainInstance.AcceptOrder(orderId, {from: account, gas:4712388}).catch(err=>console.log(err))
       
       if(!res)
         return false
@@ -283,6 +286,99 @@ D2G = {
         contentType: 'application/json',
         success:(result)=>{
           console.log("data sent")
+          window.location.reload()
+        }
+        });
+
+      return true
+      
+     
+    })
+  },
+
+
+  outForDelivery: orderId=>{
+    let DlishBlockchainInstance;
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      err ? console.log(err) : null;
+
+      let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
+      // alert(account)
+      
+      DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
+
+      
+      
+      res = await DlishBlockchainInstance.OutForDelivery(orderId, {from: account, gas:4712388}).catch(err=>console.log(err))
+      
+      if(!res)
+        return false
+        
+
+      console.log("Order accepted successfully", res) 
+
+     
+
+      $.ajax({
+        url:`${HOST}deliveryPersonnel/outForDelivery`,
+        method: 'POST',
+        data:JSON.stringify({            
+          deliverPersonnel_add: account,          
+          outForDelivery: true,
+          orderId: orderId          
+      }),
+        contentType: 'application/json',
+        success:(result)=>{
+          console.log("data sent")
+          window.location.reload()
+        }
+        });
+
+      return true
+      
+     
+    })
+  },
+
+
+  orderReceived: orderId=>{
+    let DlishBlockchainInstance;
+
+    web3.eth.getAccounts(async (err, accounts)=>{
+      err ? console.log(err) : null;
+
+      let account = web3.toChecksumAddress(accounts[0]);
+      D2G.setCookies(account)
+      // alert(account)
+      
+      DlishBlockchainInstance = await D2G.contracts.DlishBlockchain.deployed();
+
+      
+      
+      res = await DlishBlockchainInstance.received(orderId, {from: account, gas:4712388}).catch(err=>console.log(err))
+      
+      if(!res)
+        return false
+        
+
+      console.log("Order received successfully", res) 
+
+     
+
+      $.ajax({
+        url:`${HOST}orderReceived`,
+        method: 'POST',
+        data:JSON.stringify({            
+          customer_add: account,          
+          received: true,
+          orderId: orderId          
+      }),
+        contentType: 'application/json',
+        success:(result)=>{
+          console.log("data sent")
+          window.location.reload()
         }
         });
 

@@ -9,9 +9,9 @@ contract DlishBlockchain {
         address Customer;
         address Restaurant;
         address DeliveryPerson;
-        mapping (string => uint) dishid_quantity;
-        string[] DishidList;
+        string dishid_quantity;
         uint Price;
+        // string[] DishidList;
     }
     
     uint orderid;
@@ -59,6 +59,15 @@ contract DlishBlockchain {
         _;
     }
     
+    modifier isValidDeliveryPersonForTheOrderId(uint _orderId){
+        require(msg.sender == orders[_orderId].DeliveryPerson, "You were not assigned as delivery person to this order");
+        _;
+    }
+    
+    modifier isValidCustomerForTheOrderId(uint _orderId){
+        require(msg.sender == orders[_orderId].Customer, "You were not the customer for this order");
+        _;
+    }
     
     
 //#################### constructor ############################
@@ -74,25 +83,38 @@ contract DlishBlockchain {
         RestauratsList.push(msg.sender);
     }
     
-    function RegisterDeliveryPerson() public isNotDeliveryPerson {
+    function RegisterDeliveryPerson() public isNotDeliveryPerson isNotRestaurant{
         deliveryperson[msg.sender] = true;
         DeliveryPersonList.push(msg.sender);
     }
     
-    function PlaceOrder(address _restaurantaddress, uint _amount) public isPaid(_amount) isRestaurant(_restaurantaddress){
+    function PlaceOrder(address _restaurantaddress, uint _amount, string memory _dishid_quantity) public isPaid(_amount) isRestaurant(_restaurantaddress){
         orderid++;
         orders[orderid].Customer = msg.sender;
         orders[orderid].Restaurant = _restaurantaddress;
         orders[orderid].Price = _amount;
+        orders[orderid].dishid_quantity = _dishid_quantity;
     }
     
-    function AddDish(uint _orderId, string memory _dishid, uint _quantity) public isValidOrder(_orderId){
-        orders[_orderId].dishid_quantity[_dishid] = _quantity;
-        orders[_orderId].DishidList.push(_dishid);
-    } 
+    // function AddDish(uint _orderId, string memory _dishid, uint _quantity) public isValidOrder(_orderId){
+    //     orders[_orderId].dishid_quantity[_dishid] = _quantity;
+    //     orders[_orderId].DishidList.push(_dishid);
+    // } 
     
-    function AcceptOrder(uint _orderId) public isValidOrder(_orderId) isNotRestaurant isDeliveryPerson{
+    function AcceptOrder(uint _orderId) public isValidOrder(_orderId) isDeliveryPerson{
        orders[_orderId].DeliveryPerson = msg.sender; 
+    }
+    
+    function OutForDelivery(uint _orderId) public isDeliveryPerson isValidDeliveryPersonForTheOrderId(_orderId){
+        uint amount = orders[_orderId].Price;
+        uint resamount = (amount - 20) * 99/100 ;
+        address resaddress = orders[_orderId].Restaurant;
+        d2gToken.transfer(resaddress, resamount );
+    }
+    
+    function received(uint _orderId) public isValidCustomerForTheOrderId(_orderId){
+        address deladdress = orders[_orderId].DeliveryPerson;
+        d2gToken.transfer(deladdress, 20 );
     }
     
 }

@@ -35,7 +35,19 @@ const isDeliveryPersonnel = async (req, res, next)=>{
     }
 };
 
+
+const isCustomer = async (req, res, next)=>{
+    let cus_acc_add = req.cookies.cus_acc_add;
+
+    if(cus_acc_add==undefined)
+        res.status(401).send("Please unlock your wallet");
+    else{
+        next();
+    }
+};
+
 module.exports = {
     isRestaurant: isRestaurant,
-    isDeliveryPersonnel: isDeliveryPersonnel
+    isDeliveryPersonnel: isDeliveryPersonnel,
+    isCustomer: isCustomer
 }

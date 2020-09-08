@@ -30,20 +30,23 @@ router.get('/', isDeliveryPersonnel, async (req, res)=>{
                 order.restaurant_name = rest.restaurant_name
                 order.restaurant_phone = rest.phone
             })
-        }
-            
+        }            
+    }
+    else{
+        orders = await mongo.get(mongo.ORDER, { deliveryPersonnel_add: req.cookies.del_acc_add, status: { $in: [ORDER_STATUS.ACCEPTED, ORDER_STATUS.PREPARED, ORDER_STATUS.OUT_FOR_DELIVERY] } }).toArray();
     }
 
     res.render('deliveryPersonnel/orders_d', { 
         deliveryPersonnel: deliveryPersonnel,
-        orders: orders
+        orders: orders,
+        ORDER_STATUS: ORDER_STATUS
     })
     
 });
 
 
 router.get('/pastOrders', isDeliveryPersonnel, async (req, res)=>{
-    orders = await mongo.get(mongo.ORDER, { deliveryPersonnel_add: req.body.del_acc_add, status: ORDER_STATUS.ACCEPTED }).toArray();
+    let orders = await mongo.get(mongo.ORDER, { deliveryPersonnel_add: req.cookies.del_acc_add, status: ORDER_STATUS.DELIVERED }).toArray();
 
     res.render('deliveryPersonnel/pastOrders_d', { orders: orders })
 })
@@ -82,8 +85,17 @@ router.post('/register', (req, res)=>{
 
 
 router.post('/acceptOrder', isDeliveryPersonnel, (req, res)=>{
-    mongo.update(mongo.DELIVERY_PERSONNEL, { _id: req.body.del_acc_add }, { isAssigned: true })
-    mongo.update(mongo.ORDER, { _id: req.body.orderId }, { deliveryPersonal_add: req.body.del_acc_add })
+    mongo.update(mongo.DELIVERY_PERSONNEL, { _id: req.cookies.del_acc_add }, { isAssigned: true })
+    mongo.update(mongo.ORDER, { _id: parseInt(req.body.orderId) }, { deliveryPersonnel_add: req.cookies.del_acc_add, status: ORDER_STATUS.ACCEPTED })
+
+    res.status(200).send("Order accepted")
+})
+
+
+router.post('/outForDelivery', isDeliveryPersonnel, (req, res)=>{
+    // mongo.update(mongo.DELIVERY_PERSONNEL, { _id: req.cookies.del_acc_add }, { isAssigned: true })
+    mongo.update(mongo.ORDER, { _id: parseInt(req.body.orderId) }, { status: ORDER_STATUS.OUT_FOR_DELIVERY })
+
     res.status(200).send("Order accepted")
 })
 

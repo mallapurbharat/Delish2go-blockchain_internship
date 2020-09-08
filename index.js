@@ -3,6 +3,8 @@ const app = express();
 const mongo = require('./src/util/mongo');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const { ORDER_STATUS } = require('./src/util/mongo');
+const { isCustomer } = require('./src/util/auth');
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -65,6 +67,20 @@ app.get('/menu/:res_acc_add?', async (req, res)=>{
     res.render('customer/menu', {dishes:dishes});
 });
 
+
+app.get('/myOrders', isCustomer, async (req, res)=>{
+    //here res_acc_add is assumed os cus_acc_add
+    // let cus_acc_add = 
+    let orders = await mongo.get(mongo.ORDER, { customer_add: req.cookies.cus_acc_add }).toArray();
+
+    res.render('customer/myorders_c', { 
+        orders: orders,
+        ORDER_STATUS: ORDER_STATUS
+     });
+});
+
+
+
 app.get('/cart', (req, res)=>{
     res.render('customer/cart');
 });
@@ -94,6 +110,16 @@ app.post('/placeorder', (req, res)=>{
  
     placeOrder(req).then(_=>res.status(200).send("Order placed successfully")).catch(_=>res.status(500).send("Order placed was not placed"));
 
+});
+
+
+app.post('/orderReceived', isCustomer, async (req, res)=>{
+ 
+    await mongo.update(mongo.ORDER, { _id: parseInt(req.body.orderId) }, { status: ORDER_STATUS.DELIVERED })
+    let order = await mongo.get(mongo.ORDER, { _id: parseInt(req.body.orderId) }).next()
+    mongo.update(mongo.DELIVERY_PERSONNEL, { _id: order.deliveryPersonnel_add }, { isAssigned: false })
+
+    res.status(200).send("Order Delivered")
 });
 
 
