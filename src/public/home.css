@@ -9,6 +9,10 @@
   border: white;
 }
 
+.btn:hover {
+  cursor: pointer;
+}
+
 .space {
   width: 150px;
 }
@@ -123,6 +127,10 @@ select {
   position: absolute;
   top: 352px;
   left: 221px;
+}
+
+.homebtn:hover {
+  cursor: pointer;
 }
 
 .homei {
@@ -341,6 +349,7 @@ select {
 }
 
 .contacti:hover {
+  cursor: pointer;
   position: relative;
   bottom: 15px;
 }

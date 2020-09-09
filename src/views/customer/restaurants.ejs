@@ -183,8 +183,8 @@ li a:hover:not(.active) {
 
 .navbars{
   position: absolute;
-  right: 130px;
-  top: 24px;
+  right: 100px;
+  top: 20px;
   background-color: #fff;
   color: #3399ff;
   padding: 8px;
@@ -195,15 +195,20 @@ li a:hover:not(.active) {
 
 .navbarbtn{
   position: absolute;
-  right: 70px;
-  top: 30px;
+  right: 40px;
+  top: 23px;
   padding: 6px;
   background-color: #3399ff;
   color: #fff;
   border: 2px solid #3399ff;
-  border-radius:1px;
-
+  border-radius:3px;
 }
+
+.navbarbtn:hover{
+  cursor: pointer;
+}
+
+
 
 span{
   background-color: #fff;
@@ -579,6 +584,40 @@ body {
   width: 80px;
 }
 
+.navbarbtn2{
+  background-color: #3399ff;
+  color: white;
+  position: absolute;
+  right: 300px;
+  top: 22px;
+  border: 2px solid #3399ff;
+  border-radius: 3px;
+  font-size: 17px;
+  padding: 6px;
+}
+
+.navbarbtn2:hover{
+  cursor: pointer;
+}
+
+.navbarbtn3{
+  background-color: #3399ff;
+  color: white;
+  position: absolute;
+  right: 430px;
+  top: 22px;
+  border: 2px solid #3399ff;
+  border-radius: 3px;
+  font-size: 17px;
+  padding: 6px;
+}
+
+.navbarbtn3:hover{
+  cursor: pointer;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -602,6 +641,12 @@ body {
   <ul>
   <li><a class="active" href="#home"><img src="/common/img/home/fork.png" width="40" height="40">DelishtoGo</a></li>
 
+  <li><button class="navbarbtn3" onclick="gotohome()">Home</button>
+  </li>
+
+  <li><button class="navbarbtn2" onclick="gotopastorders()">Past Orders</button>
+  </li>
+
   <li style="float:right">
 
   <!-- <select class="navbars" name="city" id="city">
@@ -620,6 +665,8 @@ body {
     </select>
     <button class="navbarbtn" type="button" onclick="gotorestaurants()">Search</button>
 </li>
+
+
 </ul>
 
 <div class="ripple-background"></div>
@@ -676,6 +723,14 @@ body {
   function gotorestaurants() {
     var City = document.querySelector("#selectValue");
     window.location.href = `http://localhost:3000/restaurants/${City.value}`;
+  }
+
+  function gotopastorders() {
+    window.location.href = `http://localhost:3000/myOrders`;
+  }
+
+  function gotohome() {
+    window.location.href = `http://localhost:3000/`;
   }
 
   var urls = window.location.href.split("/");

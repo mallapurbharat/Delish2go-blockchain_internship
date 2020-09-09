@@ -54,20 +54,12 @@
             >
               <div class="uk-navbar-item">
                 <h1 class="logoColor">
-                  <i class="fas fa-utensils"></i> Restaurant Dashboard
+                  <i class="fas fa-utensils"></i> Customer Dashboard
                 </h1>
               </div>
               <div class="uk-navbar-right">
                 <div class="uk-navbar-item">
-                  <a class="linkClass" href="/restaurant/menu">Dishes</a>
-                </div>
-                <div class="uk-navbar-item">
-                  <a class="linkClass" href="/restaurant/orders"
-                    >Current Orders</a
-                  >
-                </div>
-                <div class="uk-navbar-item">
-                  <a class="linkClass" href="#">Past Orders</a>
+                  <a class="linkClass" href="#">My Orders</a>
                 </div>
                 <div class="uk-navbar-item space"></div>
               </div>
@@ -77,14 +69,14 @@
       </div>
     </div>
 
-    
+
     <div class="orders">
       <div
         class="uk-grid-column-small uk-grid-row-large uk-child-width-1-3@s uk-text-center"
         uk-grid
       >
         <% for(let i=0; i< orders.length; i++) { %>
-  
+
             <div>
               <div class="cards">
                 <h2 class="cardtitle" orderId="<%= orders[i]._id %>">Order-ID: <%= orders[i]._id %></h2>
@@ -109,7 +101,6 @@
                 <button class="cardbtn received-btn" type="button" <% if(orders[i].status==ORDER_STATUS.DELIVERED) { %> style="background-color: grey;" disabled <%}%>>received</button>
               </div>
             </div>
-
         <% } %>
       </div>
     </div>

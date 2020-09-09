@@ -12,17 +12,55 @@
 
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  
+
   <!-- UIkit JS -->
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
-  
+
   <!-- JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <title>Dishes</title>
 </head>
 <body>
+
+  <style>
+    .btn2{
+      color: #3399ff;
+      background-color: #fff;
+      font-size: 15px;
+      padding: 5px;
+      position: absolute;
+      right: 40px;
+      top: 30px;
+      border: 2px solid white;
+      border-radius: 3px;
+      font-weight: 600;
+      width: 100px;
+    }
+
+    .btn2:hover{
+      cursor: pointer;
+    }
+
+    .btn3{
+      color: #3399ff;
+      background-color: #fff;
+      font-size: 15px;
+      padding: 5px;
+      position: absolute;
+      right: 180px;
+      top: 30px;
+      border: 2px solid white;
+      border-radius: 3px;
+      font-weight: 600;
+      width: 100px;
+    }
+
+    .btn3:hover{
+      cursor: pointer;
+    }
+  </style>
 
   <!-- Nav bar -->
   <div class="uk-navbar-container" uk-navbar style="background-color:#3399ff;">
@@ -31,13 +69,19 @@
           <!-- <ul class="uk-navbar-nav">...</ul>
           <div class="uk-navbar-item">...</div> -->
       </div>
+
+      <button type="button" class="btn3"><a href="/" style="text-decoration: none;">Home</a></button>
+
+      <div class="uk-navbar-right">
+        <button type="button" class="btn2"><a href="/myOrders" style="text-decoration: none;">past orders</a></button>
+      </div>
   </div>
 
 
   <!-- Dishes card container -->
   <div class="uk-container uk-margin-top">
     <div class="uk-child-width-1-1@s uk-child-width-1-2@m uk-text-center dish-container" uk-grid>
-      
+
       <% for(let i=0; i < dishes.length; i++) { %>
 
       <div class="uk-animation-slide-right-medium dish-card">
@@ -75,5 +119,12 @@
   </div>
 
   <script src="/customer/js/menu.js"></script>
+
+
+  <script>
+    function gotopastorders() {
+      window.location.href = `http://localhost:3000/myOrders`;
+    }
+  </script>
 </body>
 </html>
