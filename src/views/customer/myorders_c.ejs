@@ -41,6 +41,44 @@
 
   </head>
   <body>
+
+    <style>
+      .btn2{
+        color: #3399ff;
+        background-color: #fff;
+        font-size: 15px;
+        padding: 5px;
+        position: absolute;
+        right: 40px;
+        top: 30px;
+        border: 2px solid white;
+        border-radius: 3px;
+        font-weight: 600;
+        width: 100px;
+      }
+
+      .btn2:hover{
+        cursor: pointer;
+      }
+
+      .btn3{
+        color: #3399ff;
+        background-color: #fff;
+        font-size: 15px;
+        padding: 5px;
+        position: absolute;
+        right: 180px;
+        top: 30px;
+        border: 2px solid white;
+        border-radius: 3px;
+        font-weight: 600;
+        width: 100px;
+      }
+
+      .btn3:hover{
+        cursor: pointer;
+      }
+    </style>
     <div id="navbar">
       <div
         uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar"
@@ -58,8 +96,13 @@
                 </h1>
               </div>
               <div class="uk-navbar-right">
+
                 <div class="uk-navbar-item">
-                  <a class="linkClass" href="#">My Orders</a>
+                  <button type="button" class="btn3"><a href="/" style="text-decoration: none;">Home</a></button>
+                </div>
+
+                <div class="uk-navbar-item">
+                  <button type="button" class="btn2"><a class="linkClass" href="/myOrders" style="text-decoration: none; color: #3399ff; font-size: 15px;">My Orders</a></button>
                 </div>
                 <div class="uk-navbar-item space"></div>
               </div>
