@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const { ORDER_STATUS } = require('./src/util/mongo');
 const { isCustomer } = require('./src/util/auth');
 
+let PORT = process.env.PORT || 3000;
+
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
@@ -129,8 +131,8 @@ app.get('/login', (req, res)=>{
 })
 
 
-app.listen(3000, ()=>{
-    console.log("listening on PORT 3000");
+app.listen(PORT, ()=>{
+    console.log(`listening on PORT ${PORT}`);
     mongo.default();
 
 });
