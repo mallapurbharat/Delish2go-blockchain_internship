@@ -35,6 +35,10 @@
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.5/dist/js/uikit-icons.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
   </head>
   <body>
     <div id="navbar">
@@ -64,6 +68,9 @@
                 </div>
                 <div class="uk-navbar-item">
                   <a class="linkClass" href="/restaurant/pastOrders">Past Orders</a>
+                </div>
+                <div class="uk-navbar-item">
+                  <a class="linkClass" id="logout-btn">Logout</a>
                 </div>
                 <div class="uk-navbar-item space"></div>
               </div>
@@ -166,5 +173,19 @@
 
                 </div> -->
 
+    <script src="/common/js/jquery.cookie.js"></script>                
+    <script>
+      $(document).ready(_=>{
+        $('#logout-btn').click(event=>{
+          event.preventDefault()
+
+          $.removeCookie('res_acc_add', { path: '/'})
+          $.removeCookie('del_acc_add', { path: '/'})
+          $.removeCookie('cus_acc_add', { path: '/'})
+
+          window.location.href = '/'
+        })
+      })
+    </script>
   </body>
 </html>

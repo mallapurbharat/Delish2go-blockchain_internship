@@ -206,7 +206,7 @@ router.get('/pastOrders', isRestaurant, async (req, res)=>{
 // });
 
 router.get('/', (req, res)=>{
-    res.send("This the restaurant home page");
+    res.redirect('/restaurant/orders');
     let restaurant = {
         res_acc_address:'',
         restaurant_name:'',
