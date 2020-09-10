@@ -728,20 +728,20 @@ body {
     var myparent = $(event.target).parent();
     var mychild = myparent.children()[0];
     dishurl = mychild.getAttribute('restaurant_id')
-    window.location.href = `http://localhost:3000/menu/${dishurl}`;
+    window.location.href = `/menu/${dishurl}`;
   }
 
   function gotorestaurants() {
     var City = document.querySelector("#selectValue");
-    window.location.href = `http://localhost:3000/restaurants/${City.value}`;
+    window.location.href = `/restaurants/${City.value}`;
   }
 
   function gotopastorders() {
-    window.location.href = `http://localhost:3000/myOrders`;
+    window.location.href = `/myOrders`;
   }
 
   function gotohome() {
-    window.location.href = `http://localhost:3000/`;
+    window.location.href = `/`;
   }
 
   var urls = window.location.href.split("/");

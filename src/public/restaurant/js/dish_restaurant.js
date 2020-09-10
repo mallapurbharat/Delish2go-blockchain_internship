@@ -1,4 +1,4 @@
-const HOST = "http://localhost:3000/";
+const HOST = `https://delish2go.herokuapp.com/`;//"http://localhost:3000/";
 let selectedDishId = null;
 
 const UCDish = event=>{
