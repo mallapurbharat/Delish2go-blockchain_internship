@@ -15,6 +15,7 @@
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,800;1,600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Zilla+Slab:ital,wght@0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/27f6149baa.js" crossorigin="anonymous"></script>
@@ -47,7 +48,7 @@
         <div class="uk-position-top">
             <nav style="background-color: white;" class="uk-navbar-container" uk-navbar>
                 <div class="uk-navbar-item">
-                    <h1 class="logoColor"> <i class="fas fa-utensils"></i> Delish2Go</h1>
+                    <a href="/" style="cursor: pointer;"><h1 class="logoColor"> <i class="fas fa-utensils"></i> Delish2Go</h1></a>                    
                 </div>
                 <div class="uk-navbar-right">
                     <div class="uk-navbar-item">
@@ -57,13 +58,16 @@
                         <a class="linkClass" href="/#why">WHY & HOW? </a>
                     </div>
                     <div class="uk-navbar-item">
-                        <a class="linkClass" href="/#contact">Contact Us</a>
+                        <a class="linkClass" href="/#contact">Developers</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a class="linkClass" href="https://ropsten.etherscan.io/token/0x431fb358527dace323809d7b1b56cd6d0b0facf9" target="_blank">Buy D2G Tokens</a>
                     </div>
                     <div class="uk-navbar-item">
                         <button class="btn"><a href="/restaurant/orders" style="text-decoration: none; color: white;">Restaurant</a></button>
                     </div>
                     <div class="uk-navbar-item">
-                        <button class="btn"><a href="/deliveryPersonnel" style="text-decoration: none; color: white;">Delivery Person</a></button>
+                        <button class="btn"><a href="/deliveryPersonnel" style="text-decoration: none; color: white;">Delivery Personnel</a></button>
                     </div>
                     <div class="uk-navbar-item ">
                          <a class="linkClass" href="/myOrders"> <button class="btn">Past Orders</button></a>
@@ -78,49 +82,58 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-    <section id="home">
-        <div class="home">
-            <div class="homeleft">
-                <h1 class="fontHeading">HUNGRY?</h1>
-                <h3>Order food from favourite restaurants near you.</h2>
-
-
-
-                    <!-- <select id="selectValue">
-                        <option value="Coimbatore">Coimbatore</option>
-                        <option value="Bangalore">Bangalore</option>
-                        <option value="Chennai">Chennai</option>
-                        <option value="Mumbai">Mumbai</option>
-                    </select> -->
-                     <select name="city" id="selectValue" >
-                        <option value="" disabled selected>Choose City</option>
-                        <% for(let i=0; i<cities.length; i++) {%>
-                            <option value="<%= cities[i] %>"><%= cities[i] %></option>
-                        <% } %>
-                    </select>
-                    <button class="homebtn" type="button" onclick="resValue()">Search</button>
-
-                <i class="fa fa-search homei" aria-hidden="true"></i>
-
-
-                <!-- <input class="homesearch" type="search" name="">
-                <i class="fa fa-search homei" aria-hidden="true"></i> -->
-
-                <h5>POPULAR CITIES IN INDIA</h5>
-                <h6 class="fontStyle">Ahmedabad Bangalore Chennai Delhi Hyderabad Mumbai & more.</h6>
+    <section id="home" class="uk-margin-medium-left uk-margin-medium-right">
+        <div class="home uk-text-center" uk-grid>
+            <div class="uk-width-1-2@m uk-width-1-1@s">
+                <div class="homeleft">
+                    <h1 class="fontHeading">HUNGRY?</h1>
+                    <h3>Order food from favourite restaurants near you.</h2>
+    
+    
+    
+                        <!-- <select id="selectValue">
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Mumbai">Mumbai</option>
+                        </select> -->
+                         <select name="city" id="selectValue" >
+                            <option value="" disabled selected>Choose City</option>
+                            <% for(let i=0; i<cities.length; i++) {%>
+                                <option value="<%= cities[i] %>"><%= cities[i] %></option>
+                            <% } %>
+                        </select>
+                        <button class="homebtn" type="button" onclick="resValue()">Search</button>
+    
+                    <i class="fa fa-search homei" aria-hidden="true"></i>
+    
+    
+                    <!-- <input class="homesearch" type="search" name="">
+                    <i class="fa fa-search homei" aria-hidden="true"></i> -->
+    
+                    <h5>POPULAR CITIES IN INDIA</h5>
+                    <h6 class="fontStyle">Ahmedabad, Bangalore, Chennai, Delhi, Hyderabad, Mumbai & more.</h6>
+                </div>
             </div>
 
-            <div class="homeright">
-                <!-- <div class="homemid"></div> -->
-                <h2 class="h2Class fontHeading">Decentralized Food Delivery Service
-                    Connecting Restaurants and Customers
-                    via Smart Contracts</h2>
+            <div class="right-home-containe uk-width-1-2@m uk-width-1-1@s uk-flex uk-flex-right uk-flex-middle">
+                <div class="homerigh">
+                    <!-- <div class="homemid"></div> -->
+                    <h2 class="h2Class fontHeading">Decentralized Food Delivery Service
+                        Connecting Restaurants and Customers
+                        via Smart Contracts</h2>
+    
+                    <p class="homePara fontStyle"> Bringing Crypto and Food to the masses, taking away the power of the centralized companies
+                        with a decentralized food order system using distributed ledger technology.</p>
+    
+    
+    
+                </div>
+            </div>
+           
 
-                <p class="homePara fontStyle"> Bringing Crypto and Food to the masses, taking away the power of the centralized companies
-                    with a decentralized food order system using distributed ledger technology.</p>
-
-
-
+            <div class="uk-width-expand@s uk-flex uk-flex-center">
+                <hr class="abouthr">
             </div>
 
 
@@ -136,7 +149,7 @@
         <div class="aboutUs">
 
 
-            <hr class="abouthr">
+            <!-- <hr class="abouthr"> -->
 
             <h1 class="fontHeading abouth1">About Us</h1>
 
@@ -163,6 +176,10 @@
                 </div>
             </div>
 
+            <div class="uk-width-expand@s uk-margin-medium-top uk-flex uk-flex-center">
+                <hr class="abouthr-b">
+            </div>
+
             </div>
     </section>
 
@@ -170,23 +187,24 @@
 
 
     <section id="why">
-        <div class="whyHow">
-            <hr class="whyhr">
-            <h1 class="fontHeading whyh1 ">Why Blockchain is used?</h1>
-                <table class="whytable">
+        <div class="whyHow uk-flex uk-flex-middle uk-flex-column">
+            <!-- <hr class="whyhr"> -->
+            <h1 class="fontHeading whyh1 uk-text-center uk-margin-large-top">Why Blockchain is used?</h1>
+                <table class="whytable uk-margin-large-top uk-width-5-6 uk-margin-medium-left uk-margin-medium-right">
                     <tr>
-                        <td class="whytd">
+                        <td class="whytd uk-width-auto ">
                             <div class="whyContents1">
                             <div class="blocktext">
                                 <div class="flip-card">
                                 <div class="flip-card-inner">
                                   <div class="flip-card-front">
-                                    <i class="fas fa-dollar-sign fa-6x whyi"></i>                                  </div>
+                                    <i class="fas fa-dollar-sign fa-6x whyi"></i>   
+                                    </div>
                                   <div class="flip-card-back">
                                     <h1 class="fontHeading fliph1">Lees fees</h1>
 
                                     <p class="fontStyle">Minimize costs using fast and secure transactions with a reliable and transparent payment system</p>
-                                </div>
+                                
                                 </div>
                               </div>
                             </div>
@@ -199,7 +217,8 @@
                                 <div class="flip-card">
                                 <div class="flip-card-inner">
                                   <div class="flip-card-front">
-                                    <i class="fas fa-database fa-6x whyi"></i>                                  </div>
+                                    <i class="fas fa-database fa-6x whyi"></i> 
+                                    </div>
                                   <div class="flip-card-back">
                                     <h1 class="fontHeading fliph1">Decentralization</h1>
                                     <p class="fontStyle">Disrupt the power of centralized entities taking huge percentages from restaurants for using their service</p>
@@ -216,7 +235,8 @@
                                 <div class="flip-card">
                                 <div class="flip-card-inner">
                                   <div class="flip-card-front">
-                                    <i class="fas fa-user-shield fa-6x whyi"></i>                                  </div>
+                                    <i class="fas fa-user-shield fa-6x whyi"></i>                                  
+                                </div>
                                   <div class="flip-card-back">
                                     <h1 class="fontHeading fliph1">Trustful reputation</h1>
                                     <p class="fontStyle">Protect users with a forgery-proof rating system through blockchain id</p>
@@ -233,7 +253,8 @@
                                 <div class="flip-card">
                                 <div class="flip-card-inner">
                                   <div class="flip-card-front">
-                                    <i class="fas fa-burn fa-6x whyi"></i>                                  </div>
+                                    <i class="fas fa-burn fa-6x whyi"></i>                                  
+                                </div>
                                   <div class="flip-card-back">
                                     <h1 class="fontHeading fliph1">Synergy</h1>
                                     <p class="fontStyle">Boost the search ranking of one single food ordering system for all restaurants with shared SEO & marketing through the bundled power of the network effect</p>
@@ -245,6 +266,9 @@
                         </td>
                     </tr>
                 </table>
+                <!-- <div class="uk-width-expand@s uk-flex uk-flex-center">
+                    <hr class="abouthr">
+                </div> -->
         </div>
     </section>
 
@@ -254,59 +278,81 @@
 
 
     <section id="contact">
-        <div class="contactUs">
-            <h1 class="fontHeading contacth1">Contact us through</h1>
-            <hr class="contacthr">
-                    <div class="contacttable">
-                        <table>
-                        <tr class="contacttr">
-                            <td class="contacttd" style="padding-left: 50px;"><i class="fab fa-linkedin fa-2x contacti"></i></td>
-                            <td class="contacttd"><i class="fab fa-facebook-square fa-2x contacti"></i></td>
-                            <td class="contacttd"><i class="fab fa-twitter-square fa-2x contacti"></i></td>
-                            <td class="contacttd"><i class="fab fa-youtube-square fa-2x contacti"></i></td>
-                            <td class="contacttd" style="border-right: none;"><i class="fab fa-github-square fa-2x contacti"></i></td>
-                        </tr>
-                    </table>
+        <div class="contactUs uk-margin-xlarge-bottom">
+            <h1 class="fontHeading contacth1 uk-margin-large-bottom">Developers</h1>
 
-                    <div class="contactli">
-                        <table>
-                            <tr>
-                                <td class="contactlitd">Teams</td>
-                                <td class="contactlitd">About</td>
-                                <td class="contactlitd">Partners</td>
-                            </tr>
-                            <tr>
-                                <td class="contactlitd">News</td>
-                                <td class="contactlitd">Why&How?</td>
-                                <td class="contactlitd">ICO</td>
+            <div class="uk-margin-large-left uk-margin-large-right uk-child-width-1-1@s uk-child-width-1-4@m" uk-grid>
 
-                            </tr>
-                            <tr>
-                                <td class="contactlitd">Contact</td>
-                                <td class="contactlitd">Faqs</td>
-                            </tr>
-                            <tr>
-                                <td class="contactlitd">Join Us</td>
-                                <td class="contactlitd">About</td>
-                            </tr>
-                            <tr>
-                                <td class="contactlitd">Token</td>
-                                <td class="contactlitd">Investment</td>
-                            </tr>
-                        </table>
+                <div class="profile uk-flex uk-flex-center uk-flex-column">
+                    <div class="uk-width-auto uk-text-center">
+                        <img src="/common/img/home/inder.jpeg" width="150px" height="150px" alt="" class="uk-border-circle">
                     </div>
+                    
+                    <a href="https://www.linkedin.com/in/inderajith-k-57b097174" target="_blank" class="uk-text-center uk-margin-small-top uk-flex uk-flex-center">
+                        <span uk-icon="icon: linkedin" class="uk-margin-small-right"></span>
+                        <span class="dev-name">Inderajith K</span>
+                    </a>
+                </div>
+
+                <div class="profile uk-flex uk-flex-center uk-flex-column">
+                    <div class="uk-width-auto uk-text-center">
+                        <img src="/common/img/home/vivek.jpeg" width="150px" height="150px" alt="" class="uk-border-circle">
                     </div>
+                    
+                    <a href="https://www.linkedin.com/in/vivek-s-150101174" target="_blank" class="uk-text-center uk-margin-small-top uk-flex uk-flex-center">
+                        <span uk-icon="icon: linkedin" class="uk-margin-small-right"></span>
+                        <span class="dev-name">Vivek S</span>
+                    </a>
+                </div>
+
+                <div class="profile uk-flex uk-flex-center uk-flex-column">
+                    <div class="uk-width-auto uk-text-center">
+                        <img src="/common/img/home/vishali.jpeg" width="150px" height="150px" alt="" class="uk-border-circle">
+                    </div>
+                    
+                    <a href="https://www.linkedin.com/in/vishali-s-5205a7155" target="_blank" class="uk-text-center uk-margin-small-top uk-flex uk-flex-center">
+                        <span uk-icon="icon: linkedin" class="uk-margin-small-right"></span>
+                        <span class="dev-name">Vishali S</span>
+                    </a>
+                </div>
+
+                <div class="profile uk-flex uk-flex-center uk-flex-column">
+                    <div class="uk-width-auto uk-text-center">
+                        <img src="/common/img/home/luize.jpeg" width="150px" height="150px" alt="" class="uk-border-circle">
+                    </div>
+                    
+                    <a href="https://www.linkedin.com/in/luis-cruz-govindapillai-6933a7174" target="_blank" class="uk-text-center uk-margin-small-top uk-flex uk-flex-center">
+                        <span uk-icon="icon: linkedin" class="uk-margin-small-right"></span>
+                        <span class="dev-name">Luis Cruz Govindapillai</span>
+                    </a>
+                </div>
+            </div>
+           
         </div>
     </section>
 
-    <div class="footer">
-        <!-- <hr class="footerhr"> -->
-        <p class="footerc">copyright &copy; 2020, Delish2Go</p>
+    <!-- <div class="uk-width-expand@s uk-flex uk-flex-center">
+        <div class="footerhr"></div>
+    </div> -->
+
+    <div class="footer uk-flex uk-flex-row uk-flex-center uk-flex-middle" >
+       
+        <a class="footerc" href="https://ropsten.etherscan.io/address/0x431fb358527dace323809d7b1b56cd6d0b0facf9" target="_blank">
+            <span uk-icon="icon: file-text" class="uk-margin-small-right"></span>
+            <span class="contract-name">DlishToken-contract</span>
+        </a>
+        <span class="uk-margin-left uk-margin-right"><i class="material-icons">fiber_manual_record</i></span>
+        <a class="footerc" href="https://ropsten.etherscan.io/address/0x2E93d17a204BA356F61d2fC1eDbf1e7F539181b5" target="_blank"> 
+            <span uk-icon="icon: file-text" class="uk-margin-small-right"></span>
+            <span class="contract-name">DlishBlockchain-contract</span>
+        </a>
+            <!-- DlishBlockchain-contract</a> -->
+         
     </div>
 
 <!---------------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<hr class="footerhr">
+<!-- <hr class="footerhr"> -->
 
 <script>
     function resValue() {

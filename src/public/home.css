@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
 /* navbar section  */
 
 .btn {
@@ -140,6 +145,24 @@ select {
   left: 300px;
 }
 
+.right-home-container{
+  position: relative;
+}
+
+.right-home-container::before{
+  
+    content:"hi ";
+    width:3px;
+    height:60%;
+    left:0;
+    top:150px;
+    position:absolute;
+    z-index:9;
+    /* background:linear-gradient(to right, white 50%, brown 50%); */
+    background: #fff;
+  
+}
+
 /* ----------------------------------------------------------------- */
 
 /* aboutus section  */
@@ -148,9 +171,19 @@ select {
   height: 10px;
   background-color: white;
   width: 150px;
-  position: absolute;
+  /* position: absolute;
   left: 570px;
-  top: -50px;
+  top: -50px; */
+  border-radius: 40px;
+}
+
+.abouthr-b {
+  height: 10px;
+  background-color: #3399ff;
+  width: 150px;
+  /* position: absolute;
+  left: 570px;
+  top: -50px; */
   border-radius: 40px;
 }
 
@@ -201,9 +234,9 @@ select {
   height: 10px;
   background-color: white;
   width: 100px;
-  position: absolute;
+  /* position: absolute;
   left: 600px;
-  top: 30px;
+  top: 30px; */
   border-radius: 40px;
 }
 
@@ -215,9 +248,9 @@ select {
 
 .whyh1 {
   color: white;
-  position: absolute;
+  /* position: absolute;
   top: 60px;
-  left: 450px;
+  left: 450px; */
 }
 
 .whyi {
@@ -226,40 +259,40 @@ select {
 }
 
 .whypara {
-  position: relative;
+  /* position: relative;
   color: white;
   top: 180px;
   left: 100px;
-  font-size: 25px;
+  font-size: 25px; */
 }
 
 .whytable {
-  position: relative;
-  top: 250px;
+  /* position: relative; */
+  /* top: 250px; */
 }
 
 .whytd {
-  padding: 0 30px;
+  /* padding: 0 30px; */
 }
 
 .whyContents1 {
-  position: relative;
-  left: 100px;
+  /* position: relative; */
+  /* left: 100px; */
 }
 
 .whyContents2 {
-  position: relative;
-  left: 200px;
+  /* position: relative; */
+  /* left: 200px; */
 }
 
 .whyContents3 {
-  position: relative;
-  left: 300px;
+  /* position: relative; */
+  /* left: 300px; */
 }
 
 .whyContents4 {
-  position: relative;
-  left: 400px;
+  /* position: relative; */
+  /* left: 400px; */
 }
 
 .flip-card {
@@ -269,14 +302,14 @@ select {
   perspective: 1000px;
 }
 .blocktext {
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: auto;
-  width: 8em;
+  width: 8em; */
 }
 .flip-card-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 300px;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -290,20 +323,25 @@ select {
 .flip-card-front,
 .flip-card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 250px;
+  height: 300px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .flip-card-front {
   background-color: #fff;
+  width: 250px;
+  height: 300px;
   color: black;
 }
 
 .flip-card-back {
   background-color: white;
+  width: 250px;
+  height: 300px;
   color: #3399ff;
+  padding: 0 1.5em 0 1.5em;
   transform: rotateY(180deg);
 }
 
@@ -312,7 +350,7 @@ select {
 /* contactus section  */
 
 .contactUs {
-  height: 600px;
+  /* height: 600px; */
   background-color: #3399ff;
   position: relative;
 }
@@ -370,37 +408,55 @@ select {
   text-align: center;
 }
 
+.profile img{
+  width: 150px;
+  height: 150px !important;
+  object-fit: cover;
+}
+
+.profile a{
+  color: #fff;
+  text-decoration: none;
+}
+
 /* ----------------------------------------------------------------------------------------------------------------- */
 
 /* footer  */
 
 .footer {
-  position: relative;
-  background-color: #3399ff;
+  /* position: relative; */
+  background-color: #0058af;
+  /* background-image: linear-gradient(#3399ff,#0058af 35%); */
+  height: 85px;
+}
+
+.footer i{
+  font-size: 14px;
+  color: #fff;
 }
 
 body {
   background-color: #3399ff;
-  position: relative;
+  /* position: relative; */
   margin: 0;
 }
 
 .footerhr {
-  background-color: white;
-  position: relative;
-  bottom: 110px;
-  border: 1px solid white;
-  border-bottom: none;
+  /* background-color: white; */
+  width: 100%;
+  border-top: 1px solid white;
+  /* border-bottom: none;
   border-left: none;
-  border-right: none;
-  opacity: 0.7;
+  border-right: none; */
+  opacity: 0.2;
 }
 
 .footerc {
   color: white;
-  position: absolute;
-  bottom: 10px;
-  left: 600px;
+  /* position: absolute; */
+  
+  /* bottom: 10px;
+  left: 600px; */
   font-size: 13px;
 }
 
